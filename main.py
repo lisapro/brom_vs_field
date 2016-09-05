@@ -96,7 +96,7 @@ data_winter = zip(*values_winter)
 
 #print values_winter
 depth_winter = data_winter[0][1:]
-pH_winter = data_winter[1][1:]
+pH_winter = data_winter[1][1:] # wrong data
 sal_winter = data_winter[2][1:]
 na_winter = data_winter[3][1:]
 
@@ -565,7 +565,7 @@ class Window(QtGui.QDialog):
         self.button3 = QtGui.QPushButton('Plot NO2,NO3,NH4')   
         self.button4 = QtGui.QPushButton('Plot Si,pH')         
         self.button5 = QtGui.QPushButton('Plot Mn,Fe;O2')            
-        self.button6 = QtGui.QPushButton('Plot Figure 6')               
+#        self.button6 = QtGui.QPushButton('Plot Figure 6')               
                             
 
         self.button1.clicked.connect(self.plot1) #Plot PO4,SO4,H2S 
@@ -588,7 +588,7 @@ class Window(QtGui.QDialog):
         layout.addWidget(self.button3,3,4,1,1)            
         layout.addWidget(self.button4,4,2,1,1)         
         layout.addWidget(self.button5,4,3,1,1)  
-        layout.addWidget(self.button6,4,4,1,1)   
+#        layout.addWidget(self.button6,4,4,1,1)   
                      
  
         self.setLayout(layout)
@@ -619,9 +619,25 @@ class Window(QtGui.QDialog):
         ax12 = self.figure.add_subplot(gs[7])
         ax22 = self.figure.add_subplot(gs[8])
       
-        plt.text(1.1, 0.5,'Water ', fontweight='bold', # draw legend to Water
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax20.transAxes) 
+
+        plt.text(1.1, 0.4,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax21.transAxes)
+             
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
         bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
         transform=ax21.transAxes) 
+                    
+        plt.text(1.1, 0.7,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax22.transAxes)
+
+        plt.text(1.1, 0.4,'Sediment', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': sed_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax22.transAxes)   
                     
         def y_lim(axis): #function to define y limits 
             if axis in (ax00,ax10,ax20):   #water
@@ -791,9 +807,25 @@ class Window(QtGui.QDialog):
         ax12 = self.figure.add_subplot(gs[7])
         ax22 = self.figure.add_subplot(gs[8])
       
-        plt.text(1.1, 0.5,'Water ', fontweight='bold', # draw legend to Water
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax20.transAxes) 
+
+        plt.text(1.1, 0.4,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax21.transAxes)
+             
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
         bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
         transform=ax21.transAxes) 
+                    
+        plt.text(1.1, 0.7,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax22.transAxes)
+
+        plt.text(1.1, 0.4,'Sediment', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': sed_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax22.transAxes)   
                     
         def y_lim(axis): #function to define y limits 
             if axis in (ax00,ax10,ax20):   #water
@@ -919,10 +951,17 @@ class Window(QtGui.QDialog):
                 
         ax10.scatter(sal_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)   
+        ax10.scatter(sal_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)   
         ax11.scatter(sal_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
+        ax11.scatter(sal_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
         ax12.scatter(sal_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                 
+                     s = self.markersize,linewidth=0.5,zorder=10)   
+        ax12.scatter(sal_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+                              
         self.canvas.draw()
         
     def plot3(self): #function to define 1 figure NO2,NO3,NH4
@@ -943,11 +982,28 @@ class Window(QtGui.QDialog):
         ax02 = self.figure.add_subplot(gs[6]) #sediment
         ax12 = self.figure.add_subplot(gs[7])
         ax22 = self.figure.add_subplot(gs[8])
-      
-        plt.text(1.1, 0.5,'Water ', fontweight='bold', # draw legend to Water
+
+             
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax20.transAxes) 
+
+        plt.text(1.1, 0.4,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax21.transAxes)
+             
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
         bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
         transform=ax21.transAxes) 
                     
+        plt.text(1.1, 0.7,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax22.transAxes)
+
+        plt.text(1.1, 0.4,'Sediment', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': sed_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax22.transAxes)        
+                            
         def y_lim(axis): #function to define y limits 
             if axis in (ax00,ax10,ax20):   #water
                 axis.set_ylim([y2min, 0])
@@ -1081,28 +1137,45 @@ class Window(QtGui.QDialog):
                 
         ax00.scatter(no2_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
+        ax00.scatter(no2_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
         ax01.scatter(no2_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                               
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        ax01.scatter(no2_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                                     
         ax02.scatter(no2_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)          
+                     s = self.markersize,linewidth=0.5,zorder=10)     
+        ax02.scatter(no2_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)             
         ax10.scatter(no3_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
+        ax10.scatter(no3_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
         ax11.scatter(no3_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)  
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        ax11.scatter(no3_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)          
         ax12.scatter(no3_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                      
+                     s = self.markersize,linewidth=0.5,zorder=10)      
+        ax12.scatter(no3_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                          
         ax20.scatter(nh4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
+        ax20.scatter(nh4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
         ax21.scatter(nh4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
+        ax21.scatter(nh4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
         ax22.scatter(nh4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-                
+        ax22.scatter(nh4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                  
    
                                                 
         self.canvas.draw()
 
-    def plot4(self): #function to define 1 figure NO2,NO3,NH4
+    def plot4(self): #function to define 1 figure Si,pH
         plt.clf() #clear figure before updating 
 
         alpha_autumn = 0.5
@@ -1123,9 +1196,25 @@ class Window(QtGui.QDialog):
         ax12 = self.figure.add_subplot(gs[5])
 #        ax22 = self.figure.add_subplot(gs[8])
       
-        plt.text(1.1, 0.5,'Water ', fontweight='bold', # draw legend to Water
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax10.transAxes) 
+
+        plt.text(1.1, 0.4,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax11.transAxes)
+             
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
         bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
         transform=ax11.transAxes) 
+                    
+        plt.text(1.1, 0.7,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax12.transAxes)
+
+        plt.text(1.1, 0.4,'Sediment', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': sed_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax12.transAxes)  
                     
         def y_lim(axis): #function to define y limits 
             if axis in (ax00,ax10):   #water
@@ -1254,7 +1343,7 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10)                              
         self.canvas.draw()
 
-    def plot5(self): #function to define 1 figure NO2,NO3,NH4
+    def plot5(self): #function to define Mn,fe,O2
         plt.clf() #clear figure before updating 
         gs = gridspec.GridSpec(3, 3) 
         gs.update(left=0.06, right=0.93,top = 0.94,bottom = 0.04, wspace=0.2,hspace=0.1)
@@ -1273,9 +1362,25 @@ class Window(QtGui.QDialog):
         ax12 = self.figure.add_subplot(gs[7])
         ax22 = self.figure.add_subplot(gs[8])
       
-        plt.text(1.1, 0.5,'Water ', fontweight='bold', # draw legend to Water
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax20.transAxes) 
+
+        plt.text(1.1, 0.4,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax21.transAxes)
+             
+        plt.text(1.1, 0.7,'Water ', fontweight='bold', # draw legend to Water
         bbox={'facecolor': wat_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
         transform=ax21.transAxes) 
+                    
+        plt.text(1.1, 0.7,'BBL', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': bbl_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax22.transAxes)
+
+        plt.text(1.1, 0.4,'Sediment', fontweight='bold', # draw legend to Water
+        bbox={'facecolor': sed_color, 'alpha':0.5, 'pad':10}, fontsize=14, rotation=90, 
+        transform=ax22.transAxes)   
                     
         def y_lim(axis): #function to define y limits 
             if axis in (ax00,ax10,ax20):   #water
