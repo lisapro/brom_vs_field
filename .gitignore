@@ -1,8 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-.project
-.pydevproject
+*.project
+*.pydevproject
 *$py.class
 
 # C extensions
@@ -85,10 +85,11 @@ venv/
 ENV/
 
 # data
-.nc
-.xlsx
-.png
-.txt
+*.nc
+*.xlsx
+*.png
+*.txt
+*.docx
 
 
 # Spyder project settings
