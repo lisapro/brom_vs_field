@@ -40,7 +40,7 @@ import numpy as np
 values_summer=[]   # create empty matrix for storing data
 f1 = None
 try:
-    f_summer = open('TEST.txt', 'rb')   
+    f_summer = open('summer.txt', 'rb')   
     for i in range(0,48):        
         line1 = f_summer.readline()
         values_summer.append(line1.split())
@@ -928,15 +928,15 @@ class Window(QtGui.QDialog):
                 ax22.plot(kz[n],depth_sed2,self.summer,linewidth=self.linewidth,alpha = self.alpha)              
                 
             elif n >= 236 and n < 240: #from 25 to 30 august               
-                ax00.plot(temp[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--', zorder=9)      #marker='*',       
-                ax01.plot(temp[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)  
-                ax02.plot(temp[n],depth_sed,self.summer,linewidth=3, alpha = 1,linestyle= '--',zorder=9)                 
-                ax10.plot(sal[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
-                ax11.plot(sal[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
-                ax12.plot(sal[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)       
-                ax20.plot(kz[n],depth2,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
-                ax21.plot(kz[n],depth2,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
-                ax22.plot(kz[n],depth_sed2,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)                
+                ax00.plot(temp[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o', zorder=9)      #marker='*',       
+                ax01.plot(temp[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)  
+                ax02.plot(temp[n],depth_sed,self.summer,linewidth=3, alpha = 1,linestyle= '--',marker='o',zorder=9)                 
+                ax10.plot(sal[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)   
+                ax11.plot(sal[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)   
+                ax12.plot(sal[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)       
+                ax20.plot(kz[n],depth2,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)   
+                ax21.plot(kz[n],depth2,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)   
+                ax22.plot(kz[n],depth_sed2,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)                
             else:   #Spring and autumn
 
                 ax00.plot(temp[n],depth,self.spring_autumn, linewidth=0.7, alpha = 0.5)             
