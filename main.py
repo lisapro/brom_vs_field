@@ -40,8 +40,8 @@ import numpy as np
 values_summer=[]   # create empty matrix for storing data
 f1 = None
 try:
-    f_summer = open('summer.txt', 'rb')   
-    for i in range(0,48):        
+    f_summer = open('summer.txt', 'rb')   # Read file with summer water column data 
+    for i in range(0,85):        
         line1 = f_summer.readline()
         values_summer.append(line1.split())
   
@@ -52,10 +52,9 @@ except  KeyboardInterrupt:
 finally:
     if  f_summer:
         f_summer.close()
-    print("(Cleaning up: Closed the file)")
+    print("(Cleaning up: Read and closed the file Summer)")
 
 data_summer = zip(*values_summer)
-#print values_summer
 depth_summer = data_summer[0][1:]
 pH_summer = data_summer[1][1:]
 sal_summer = data_summer[2][1:]
@@ -68,16 +67,19 @@ nh4_summer = data_summer[11][1:]
 si_summer = data_summer[12][1:]
 
 po4_summer = data_summer[14][1:]
+
 mn_summer = data_summer[15][1:]
 fe_summer = data_summer[16][1:]
 date_summer = data_summer[17][1:]
 sed_depth_summer = data_summer[18][1:]
+h2s_summer = data_summer[19][1:]
+
 
 values_winter=[]   # create empty matrix for storing data
 f_winter = None
 try:
     f_winter = open('winter.txt', 'rb')   
-    for i in range(0,55):        
+    for i in range(0,79):        
         line_winter = f_winter.readline()
         values_winter.append(line_winter.split())
   
@@ -89,28 +91,27 @@ except  KeyboardInterrupt:
 finally:
     if  f_winter:
         f_winter.close()
-    print("(Cleaning up: Closed the file)")
+    print("(Cleaning up: Read and closed the file Winter)")
 
 data_winter = zip(*values_winter)
 
 
 #print values_winter
 depth_winter = data_winter[0][1:]
-pH_winter = data_winter[1][1:] # wrong data
+pH_winter = data_winter[1][1:]
 sal_winter = data_winter[2][1:]
 na_winter = data_winter[3][1:]
-
 so4_winter = data_winter[8][1:]
 no3_winter = data_winter[9][1:]
 no2_winter = data_winter[10][1:]
 nh4_winter = data_winter[11][1:]
 si_winter = data_winter[12][1:]
-#po4_winter = data_winter[14][1:]
+po4_winter = data_winter[14][1:] 
 mn_winter = data_winter[15][1:]
 fe_winter = data_winter[16][1:]
 date_winter = data_winter[17][1:]
 sed_depth_winter = data_winter[18][1:]
-
+h2s_winter = data_winter[19][1:]
 
 
 
@@ -122,6 +123,7 @@ po4_summermin = np.ceil(float(min(po4_summer)))
 po4_summermax = np.ceil(float(max(po4_summer)))
 pH_summermin = np.ceil(float(min(pH_summer)))
 pH_summermax = np.ceil(float(max(pH_summer)))
+
 #h2s_summermin = np.ceil(float(min(h2s_summer)))
 #h2s_summermax = np.ceil(float(max(h2s_summer)))
 no2_summermin = np.ceil(float(min(no2_summer)))
@@ -154,11 +156,58 @@ except  KeyboardInterrupt:
 finally:
     if  f_o2:
         f_o2.close()
-    print("(Cleaning up: Closed the file)")
+    print("(Cleaning up: Read and closed the file O2)")
 data_o2 = zip(*values_o2)
 depth_o2 = data_o2[0][1:]
 sed_depth_o2 = data_o2[1][1:]
 o2_o2 = data_o2[2][1:]
+
+
+values_pH=[]   # create empty matrix for storing data
+#fpH = None
+try:
+    f_pH = open('pH.txt', 'rb')   
+    while True:
+        line_pH = f_pH.readline()
+        if len(line_pH) == 0:
+            break
+        values_pH.append(line_pH.split())        
+except  IOError:
+    print("Could not find a file.")
+except  KeyboardInterrupt:
+    print("!! You cancelled the reading from the file.")
+finally:
+    if  f_pH:
+        f_pH.close()
+    print("(Cleaning up: Read and closed the file pH)")
+data_pH = zip(*values_pH)
+depth_pH = data_pH[0][1:]
+sed_depth_pH = data_pH[1][1:]
+pH_pH = data_pH[2][1:]
+
+
+values_pH_winter=[]   # create empty matrix for storing data
+#fpH = None
+try:
+    f_pH_winter = open('pH_winter.txt', 'rb')   
+    while True:
+        line_pH_winter = f_pH_winter.readline()
+        if len(line_pH_winter) == 0:
+            break
+        values_pH_winter.append(line_pH_winter.split())        
+except  IOError:
+    print("Could not find a file.")
+except  KeyboardInterrupt:
+    print("!! You cancelled the reading from the file.")
+finally:
+    if  f_pH_winter:
+        f_pH_winter.close()
+    print("(Cleaning up: Read and closed the file pH_winter)")
+    
+data_pH_winter = zip(*values_pH_winter)
+depth_pH_winter = data_pH_winter[0][1:]
+sed_depth_pH_winter = data_pH_winter[1][1:]
+pH_pH_winter = data_pH_winter[2][1:]
 
 
 
@@ -302,22 +351,9 @@ def calculate_sedmax():
             ysedmax =  ysed + 10                
             return ysedmax
             break          
-#calculate_sedmin()        
-        
-#y3min = -10 #109.91
-#y3max = 10 #110.10
+
 ysedmin = calculate_sedmin()
 ysedmax = calculate_sedmax()    #10#depth[len(depth[:])-1]#110.1
-
-
-
-#for filling the font
-
-
-#ysedmin_fill_bbl = 0
-#y3max_fill_bbl = 0
-#y3min_fill_sed = 0
-
 
 xticks =(np.arange(0,100000))
 
@@ -327,7 +363,7 @@ sed_color = '#a3abb1' #'#7a8085' #666b6f '#'#916012'
 alpha_wat = 0.3 # saturation of color (from 0 to 1) 
 alpha_bbl = 0.3
 alpha_sed = 0.5
-
+alpha_autumn = 0.5
 
 #positions for different axes, sharing one subplot
 axis1 = 0
@@ -343,11 +379,6 @@ labelaxis3_y = 1.26
 labelaxis4_y = 1.38
 labelaxis5_y = 1.48
 
-
-#wat_color = '#c9ecfd' #colors for filling water,bbl and sedimnet 
-#bbl_color = '#2873b8' 
-#sed_color = '#916012'
-
 xlabel_fontsize = 14
 
 
@@ -360,7 +391,7 @@ def watmin(variable):
     n = np.round(variable[:,0:ny2max].min())
     return n
 
-so4_summermin = np.ceil(float(min(so4_summer)))
+#so4_summermin = np.ceil(float(min(so4_summer)))
 
 
 def sedmax(variable):
@@ -520,9 +551,11 @@ sed_fes2max = sedmax(fes2)
 ch4max = watmax(ch4)
 sed_ch4max = sedmax(ch4)
 
-phmax = watmax(ph)
+phmax = round((ph[:,:ny2min].max()),1)#watmax(ph)
+print phmax
 phmin = watmin(ph)
-sed_phmax = sedmax(ph)
+sed_phmax = round((ph[:,ny2min:].max()),1)
+
 sed_phmin = sedmin(ph)
 
 pco2max = watmax(pco2)
@@ -541,7 +574,7 @@ camax = watmax(ca)
 sed_camax = sedmax(ca)
 
 
-fh.close()
+fh.close() #Close the nc file
 
 class Window(QtGui.QDialog):
     def __init__(self, parent=None):
@@ -597,8 +630,8 @@ class Window(QtGui.QDialog):
     spring_autumn ='#998970'#'#cecebd'#'#ffffd1'#'#e5e5d2'  
     winter = '#8dc0e7' 
     summer = '#d0576f' 
-    markersize=50
-    linewidth = 1
+    markersize=25
+    linewidth = 0.5
     alpha = 0.5 
     def plot1(self): #function to define 1 figure PO4,SO4,H2S
         plt.clf() #clear figure before updating 
@@ -692,6 +725,7 @@ class Window(QtGui.QDialog):
         for axis in (ax00,ax01,ax02,ax10,ax11,ax12,ax20,ax21,ax22): 
             axis.xaxis.set_label_position('top')
             axis.xaxis.tick_top()
+            ax20.set_xticks(np.arange(0,2*kzmax),kzmax)      
         for axis in (ax00, ax01):   
             axis.set_xlim([po4min,po4max])
             axis.set_xticks(np.arange(np.round(po4min),np.ceil(po4max)),((np.ceil(po4max)-np.round(po4min))/2))
@@ -710,7 +744,7 @@ class Window(QtGui.QDialog):
 
                         
         for n in range(0,365):  
-            if n >= 0 and n <= 90:      #Winter                                 
+            if n >= 0 and n <= 18:      #Winter                                 
                 ax00.plot(po4[n],depth,self.winter,linewidth=0.7)             
                 ax01.plot(po4[n],depth,self.winter,linewidth=0.7)  
                 ax02.plot(po4[n],depth_sed,self.winter,linewidth=0.7)                 
@@ -721,6 +755,30 @@ class Window(QtGui.QDialog):
                 ax20.plot(h2s[n],depth,self.winter,linewidth=0.7) 
                 ax21.plot(h2s[n],depth,self.winter,linewidth=0.7)  #
                 ax22.plot(h2s[n],depth_sed,self.winter,linewidth=0.7)
+                
+            elif n >= 22 and n <= 90:      #Winter                                 
+                ax00.plot(po4[n],depth,self.winter,linewidth=0.7)             
+                ax01.plot(po4[n],depth,self.winter,linewidth=0.7)  
+                ax02.plot(po4[n],depth_sed,self.winter,linewidth=0.7)                 
+                ax10.plot(so4[n],depth,self.winter,linewidth=0.7)   
+                ax11.plot(so4[n],depth,self.winter,linewidth=0.7)   
+                ax12.plot(so4[n],depth_sed,self.winter,linewidth=0.7) 
+                
+                ax20.plot(h2s[n],depth,self.winter,linewidth=0.7) 
+                ax21.plot(h2s[n],depth,self.winter,linewidth=0.7)  #
+                ax22.plot(h2s[n],depth_sed,self.winter,linewidth=0.7)
+                                
+            elif n>=19 and n<=21: #winter to compare with field data
+                ax00.plot(po4[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)             
+                ax01.plot(po4[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)  
+                ax02.plot(po4[n],depth_sed,'#4e9dda',linewidth=3, alpha = 1,linestyle= '--',zorder=8)                 
+                ax10.plot(so4[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax11.plot(so4[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax12.plot(so4[n],depth_sed,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)       
+                ax20.plot(h2s[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax21.plot(h2s[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   #marker='o',
+                ax22.plot(h2s[n],depth_sed,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8) #marker='o',                 
+                
             elif n >= 335 and n <365: #
                 ax00.plot(po4[n],depth,self.winter,linewidth=0.7)             
                 ax01.plot(po4[n],depth,self.winter,linewidth=0.7)  
@@ -740,9 +798,9 @@ class Window(QtGui.QDialog):
                 ax10.plot(so4[n],depth,self.summer,linewidth=self.linewidth,alpha = self.alpha)   
                 ax11.plot(so4[n],depth,self.summer,linewidth=self.linewidth,alpha = self.alpha)   
                 ax12.plot(so4[n],depth_sed,self.summer,linewidth=self.linewidth,alpha = self.alpha) 
-                ax20.plot(h2s[n],depth,self.summer,linewidth=self.linewidth) 
-                ax21.plot(h2s[n],depth,self.summer,linewidth=self.linewidth)  #
-                ax22.plot(h2s[n],depth_sed,self.summer,linewidth=self.linewidth)              
+                ax20.plot(h2s[n],depth,self.summer,linewidth=self.linewidth,alpha = self.alpha) 
+                ax21.plot(h2s[n],depth,self.summer,linewidth=self.linewidth,alpha = self.alpha)  #
+                ax22.plot(h2s[n],depth_sed,self.summer,linewidth=self.linewidth,alpha = self.alpha)              
                 
             elif n >= 236 and n < 240: #from 25 to 30 august               
                 ax00.plot(po4[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)             
@@ -762,30 +820,49 @@ class Window(QtGui.QDialog):
                 ax10.plot(so4[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
                 ax11.plot(so4[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
                 ax12.plot(so4[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
-                ax20.plot(h2s[n],depth,self.spring_autumn,linewidth=0.7) 
-                ax21.plot(h2s[n],depth,self.spring_autumn,linewidth=0.7)  #
-                ax22.plot(h2s[n],depth_sed,self.spring_autumn,linewidth=0.7) 
+                ax20.plot(h2s[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn) 
+                ax21.plot(h2s[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)  #
+                ax22.plot(h2s[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn) 
                     
         ax00.scatter(po4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-         
-    
-             
-        ax01.scatter(po4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10) 
-        ax02.scatter(po4_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)         
         ax10.scatter(so4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
-        ax10.scatter(so4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                
+        ax20.scatter(h2s_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                                     
+        ax01.scatter(po4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
         ax11.scatter(so4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
-        ax11.scatter(so4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+        ax21.scatter(h2s_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                   
+        ax02.scatter(po4_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)         
         ax12.scatter(so4_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)    
-                                                     
+        ax22.scatter(h2s_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        
+        ax00.scatter(po4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        ax10.scatter(so4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        ax20.scatter(h2s_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                       
+        ax01.scatter(po4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)       
+        ax11.scatter(so4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+        ax21.scatter(h2s_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        ax02.scatter(po4_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)       
+        ax12.scatter(so4_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+        ax22.scatter(h2s_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+        
+                                                              
         self.canvas.draw()     
         
     def plot2(self): # function to define 2 figure T,S,Kz  
@@ -888,22 +965,44 @@ class Window(QtGui.QDialog):
             
         for axis in (ax20, ax21, ax22):   
             axis.set_xlim([kzmin,kzmax])
-
+            axis.set_xticks(np.arange(0,(round(kzmax+(kzmax/2.),5)),kzmax/2.))   
 #            axis.set_xticks(np.arange(kzmin,0.75,0.25))          
               
                              
         for n in range(0,365):  
-            if n >= 0 and n <= 90:      #Winter                                 
+            if n >= 0 and n <= 18:      #Winter                                 
                 ax00.plot(temp[n],depth,self.winter,linewidth=0.7)             
                 ax01.plot(temp[n],depth,self.winter,linewidth=0.7)  
                 ax02.plot(temp[n],depth_sed,self.winter,linewidth=0.7)                 
                 ax10.plot(sal[n],depth,self.winter,linewidth=0.7)   
                 ax11.plot(sal[n],depth,self.winter,linewidth=0.7)   
-                ax12.plot(sal[n],depth_sed,self.winter,linewidth=0.7) 
-                
+                ax12.plot(sal[n],depth_sed,self.winter,linewidth=0.7)     
                 ax20.plot(kz[n],depth2,self.winter,linewidth=0.7) 
                 ax21.plot(kz[n],depth2,self.winter,linewidth=0.7)  #
                 ax22.plot(kz[n],depth_sed2,self.winter,linewidth=0.7)
+            elif n >= 22 and n <= 90:      #Winter                                 
+                ax00.plot(temp[n],depth,self.winter,linewidth=0.7)             
+                ax01.plot(temp[n],depth,self.winter,linewidth=0.7)  
+                ax02.plot(temp[n],depth_sed,self.winter,linewidth=0.7)                 
+                ax10.plot(sal[n],depth,self.winter,linewidth=0.7)   
+                ax11.plot(sal[n],depth,self.winter,linewidth=0.7)   
+                ax12.plot(sal[n],depth_sed,self.winter,linewidth=0.7)     
+                ax20.plot(kz[n],depth2,self.winter,linewidth=0.7) 
+                ax21.plot(kz[n],depth2,self.winter,linewidth=0.7)  #
+                ax22.plot(kz[n],depth_sed2,self.winter,linewidth=0.7)                
+                
+            elif n>=19 and n<=21: #winter to compare with field data
+                ax00.plot(temp[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)             
+                ax01.plot(temp[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)  
+                ax02.plot(temp[n],depth_sed,'#4e9dda',linewidth=3, alpha = 1,linestyle= '--',zorder=8)                 
+                ax10.plot(sal[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax11.plot(sal[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax12.plot(sal[n],depth_sed,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)       
+                ax20.plot(kz[n],depth2,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax21.plot(kz[n],depth2,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   #marker='o',
+                ax22.plot(kz[n],depth_sed2,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8) #marker='o',                   
+                
+                
             elif n >= 335 and n <365: #
                 ax00.plot(temp[n],depth,self.winter,linewidth=0.7)             
                 ax01.plot(temp[n],depth,self.winter,linewidth=0.7)  
@@ -927,27 +1026,26 @@ class Window(QtGui.QDialog):
                 ax21.plot(kz[n],depth2,self.summer,linewidth=self.linewidth,alpha = self.alpha)  #
                 ax22.plot(kz[n],depth_sed2,self.summer,linewidth=self.linewidth,alpha = self.alpha)              
                 
-            elif n >= 236 and n < 240: #from 25 to 30 august               
-                ax00.plot(temp[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o', zorder=9)      #marker='*',       
-                ax01.plot(temp[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)  
-                ax02.plot(temp[n],depth_sed,self.summer,linewidth=3, alpha = 1,linestyle= '--',marker='o',zorder=9)                 
-                ax10.plot(sal[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)   
-                ax11.plot(sal[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)   
-                ax12.plot(sal[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)       
-                ax20.plot(kz[n],depth2,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)   
-                ax21.plot(kz[n],depth2,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)   
-                ax22.plot(kz[n],depth_sed2,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker='o',zorder=9)                
+            elif n >= 236 and n < 240: #from 25 to 30 august ( to compare with field data)                
+                ax00.plot(temp[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--', zorder=9) #marker='o',     
+                ax01.plot(temp[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)  #marker='o',
+                ax02.plot(temp[n],depth_sed,self.summer,linewidth=3, alpha = 1,linestyle= '--',zorder=9)                 
+                ax10.plot(sal[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax11.plot(sal[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax12.plot(sal[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)       
+                ax20.plot(kz[n],depth2,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax21.plot(kz[n],depth2,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax22.plot(kz[n],depth_sed2,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)                
             else:   #Spring and autumn
-
-                ax00.plot(temp[n],depth,self.spring_autumn, linewidth=0.7, alpha = 0.5)             
-                ax01.plot(temp[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)  
-                ax02.plot(temp[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = 0.5)                 
-                ax10.plot(sal[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
-                ax11.plot(sal[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
-                ax12.plot(sal[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
-                ax20.plot(kz[n],depth2,self.spring_autumn,linewidth=0.7) 
-                ax21.plot(kz[n],depth2,self.spring_autumn,linewidth=0.7)  #
-                ax22.plot(kz[n],depth_sed2,self.spring_autumn,linewidth=0.7) 
+                ax00.plot(temp[n],depth,self.spring_autumn, linewidth=0.7, alpha = alpha_autumn)             
+                ax01.plot(temp[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)  
+                ax02.plot(temp[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)                 
+                ax10.plot(sal[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)   
+                ax11.plot(sal[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)   
+                ax12.plot(sal[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)   
+                ax20.plot(kz[n],depth2,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn) 
+                ax21.plot(kz[n],depth2,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)  #
+                ax22.plot(kz[n],depth_sed2,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn) 
                 
         ax10.scatter(sal_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)   
@@ -1008,9 +1106,9 @@ class Window(QtGui.QDialog):
             if axis in (ax00,ax10,ax20):   #water
                 axis.set_ylim([y2min, 0])
                 axis.fill_between(xticks, y1max, y1min, facecolor= wat_color, alpha=alpha_wat)
-                axis.yaxis.grid(True,'minor')
-                axis.xaxis.grid(True,'major')                
-                axis.yaxis.grid(True,'major')                
+                axis.yaxis.grid(True,'minor') #add grid to plot 
+                axis.xaxis.grid(True,'major') #add grid to plot                
+                axis.yaxis.grid(True,'major') #add grid to plot                 
             elif axis in (ax01,ax11,ax21):  #BBL
                 axis.set_ylim([y2max, y2min])
                 axis.fill_between(xticks, y2max_fill_water, y2min, facecolor= wat_color, alpha=alpha_wat) 
@@ -1070,22 +1168,48 @@ class Window(QtGui.QDialog):
             axis.set_xlim([nh4min,nh4max])
         ax22.set_xlim([sed_nh4min,sed_nh4max]) 
 #            axis.set_xticks(np.arange(nh4min,0.75,0.25))          
-
-# Plot Field data        
+    
 
                         
         for n in range(0,365):  
-            if n >= 0 and n <= 90:      #Winter                                 
+            if n >= 0 and n <= 18:      #Winter                                 
                 ax00.plot(no2[n],depth,self.winter,linewidth=0.7)             
                 ax01.plot(no2[n],depth,self.winter,linewidth=0.7)  
                 ax02.plot(no2[n],depth_sed,self.winter,linewidth=0.7)                 
                 ax10.plot(no3[n],depth,self.winter,linewidth=0.7)   
                 ax11.plot(no3[n],depth,self.winter,linewidth=0.7)   
-                ax12.plot(no3[n],depth_sed,self.winter,linewidth=0.7) 
-                
+                ax12.plot(no3[n],depth_sed,self.winter,linewidth=0.7)         
                 ax20.plot(nh4[n],depth,self.winter,linewidth=0.7) 
                 ax21.plot(nh4[n],depth,self.winter,linewidth=0.7)  #
                 ax22.plot(nh4[n],depth_sed,self.winter,linewidth=0.7)
+                
+            elif n >= 22 and n <= 90:      #Winter                                 
+                ax00.plot(no2[n],depth,self.winter,linewidth=0.7)             
+                ax01.plot(no2[n],depth,self.winter,linewidth=0.7)  
+                ax02.plot(no2[n],depth_sed,self.winter,linewidth=0.7)                 
+                ax10.plot(no3[n],depth,self.winter,linewidth=0.7)   
+                ax11.plot(no3[n],depth,self.winter,linewidth=0.7)   
+                ax12.plot(no3[n],depth_sed,self.winter,linewidth=0.7)         
+                ax20.plot(nh4[n],depth,self.winter,linewidth=0.7) 
+                ax21.plot(nh4[n],depth,self.winter,linewidth=0.7)  #
+                ax22.plot(nh4[n],depth_sed,self.winter,linewidth=0.7)                
+                
+                
+            elif n>=19 and n<=21: #winter to compare with field data
+                ax00.plot(no2[n],depth,'#4e9dda',linewidth=3,alpha = 0.5,linestyle= '--',zorder=5)             
+                ax01.plot(no2[n],depth,'#4e9dda',linewidth=3,alpha = 0.5,linestyle= '--',zorder=5)  
+                ax02.plot(no2[n],depth_sed,'#4e9dda',linewidth=3, alpha = 0.5,linestyle= '--',zorder=5)                 
+                ax10.plot(no3[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax11.plot(no3[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax12.plot(no3[n],depth_sed,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)       
+                ax20.plot(nh4[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   
+                ax21.plot(nh4[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8)   #marker='o',
+                ax22.plot(nh4[n],depth_sed,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=8) #marker='o',                   
+                
+                
+                
+                
+                
             elif n >= 335 and n <365: #
                 ax00.plot(no2[n],depth,self.winter,linewidth=0.7)             
                 ax01.plot(no2[n],depth,self.winter,linewidth=0.7)  
@@ -1105,9 +1229,9 @@ class Window(QtGui.QDialog):
                 ax10.plot(no3[n],depth,self.summer,linewidth=self.linewidth,alpha = self.alpha)   
                 ax11.plot(no3[n],depth,self.summer,linewidth=self.linewidth,alpha = self.alpha)   
                 ax12.plot(no3[n],depth_sed,self.summer,linewidth=self.linewidth,alpha = self.alpha) 
-                ax20.plot(nh4[n],depth,self.summer,linewidth=self.linewidth) 
-                ax21.plot(nh4[n],depth,self.summer,linewidth=self.linewidth)  #
-                ax22.plot(nh4[n],depth_sed,self.summer,linewidth=self.linewidth)              
+                ax20.plot(nh4[n],depth,self.summer,linewidth=self.linewidth,alpha = self.alpha) 
+                ax21.plot(nh4[n],depth,self.summer,linewidth=self.linewidth,alpha = self.alpha)  #
+                ax22.plot(nh4[n],depth_sed,self.summer,linewidth=self.linewidth,alpha = self.alpha)              
                 
             elif n >= 236 and n < 240: #from 25 to 30 august               
                 ax00.plot(no2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)             
@@ -1122,19 +1246,19 @@ class Window(QtGui.QDialog):
                          
             else:   #Spring and autumn
 
-                ax00.plot(no2[n],depth,self.spring_autumn, linewidth=0.7, alpha = 0.5)             
-                ax01.plot(no2[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)  
-                ax02.plot(no2[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = 0.5)                 
-                ax10.plot(no3[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)  
+                ax00.plot(no2[n],depth,self.spring_autumn, linewidth=0.7, alpha = alpha_autumn)             
+                ax01.plot(no2[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)  
+                ax02.plot(no2[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)                 
+                ax10.plot(no3[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)  
                  
-                ax11.plot(no3[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
-                ax12.plot(no3[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
+                ax11.plot(no3[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)   
+                ax12.plot(no3[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)   
 
-                ax20.plot(nh4[n],depth,self.spring_autumn,linewidth=0.7) 
-                ax21.plot(nh4[n],depth,self.spring_autumn,linewidth=0.7)  #
-                ax22.plot(nh4[n],depth_sed,self.spring_autumn,linewidth=0.7) 
+                ax20.plot(nh4[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn) 
+                ax21.plot(nh4[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)  #
+                ax22.plot(nh4[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn) 
                 
-                
+        # Field data        
         ax00.scatter(no2_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
         ax00.scatter(no2_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
@@ -1142,11 +1266,12 @@ class Window(QtGui.QDialog):
         ax01.scatter(no2_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         ax01.scatter(no2_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                                     
+                     s = self.markersize,linewidth=0.5,zorder=10)                                             
         ax02.scatter(no2_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)     
         ax02.scatter(no2_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)             
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+                   
         ax10.scatter(no3_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
         ax10.scatter(no3_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
@@ -1154,11 +1279,13 @@ class Window(QtGui.QDialog):
         ax11.scatter(no3_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         ax11.scatter(no3_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)          
+                     s = self.markersize,linewidth=0.5,zorder=10)
+                  
         ax12.scatter(no3_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)      
         ax12.scatter(no3_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                          
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+                                 
         ax20.scatter(nh4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         ax20.scatter(nh4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
@@ -1166,10 +1293,11 @@ class Window(QtGui.QDialog):
         ax21.scatter(nh4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         ax21.scatter(nh4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)         
-        ax22.scatter(nh4_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-        ax22.scatter(nh4_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+               
+        ax22.scatter(nh4_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        ax22.scatter(nh4_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                  
    
                                                 
@@ -1274,22 +1402,40 @@ class Window(QtGui.QDialog):
             axis.set_xticks(np.arange(np.round(simin),np.ceil(simax)),((np.ceil(simax)-np.round(simin))/2))
         ax02.set_xlim([sed_simin,sed_simax])    
         for axis in (ax10, ax11):
-            watmin = min(pH_summermin,phmin)
-            axis.set_xlim([watmin,phmax])
-        ax12.set_xlim([sed_phmin,sed_phmax])    
+#            watmin = min(pH_summermin,phmin)
+            axis.set_xlim([phmin,phmax+0.1])
+#            axis.set_xticks(np.arange(np.round(phmin),np.ceil(simax)),((np.ceil(simax)-np.round(simin))/2))            
+        ax12.set_xlim([sed_phmin,sed_phmax+0.3])    
                    
 
 # Plot Field data        
 
                     
         for n in range(0,365):  
-            if n >= 0 and n <= 90:      #Winter                                 
+            if n >= 0 and n <= 18:      #Winter                                 
                 ax00.plot(si[n],depth,self.winter,linewidth=self.linewidth)             
                 ax01.plot(si[n],depth,self.winter,linewidth=self.linewidth)  
                 ax02.plot(si[n],depth_sed,self.winter,linewidth=self.linewidth)                 
                 ax10.plot(ph[n],depth,self.winter,linewidth=self.linewidth)   
                 ax11.plot(ph[n],depth,self.winter,linewidth=self.linewidth)   
                 ax12.plot(ph[n],depth_sed,self.winter,linewidth=self.linewidth) 
+                
+            if n >= 22 and n <= 90:      #Winter                                 
+                ax00.plot(si[n],depth,self.winter,linewidth=self.linewidth)             
+                ax01.plot(si[n],depth,self.winter,linewidth=self.linewidth)  
+                ax02.plot(si[n],depth_sed,self.winter,linewidth=self.linewidth)                 
+                ax10.plot(ph[n],depth,self.winter,linewidth=self.linewidth)   
+                ax11.plot(ph[n],depth,self.winter,linewidth=self.linewidth)   
+                ax12.plot(ph[n],depth_sed,self.winter,linewidth=self.linewidth) 
+
+            elif n>=19 and n<=21: #winter to compare with field data
+                ax00.plot(si[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)             
+                ax01.plot(si[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)  
+                ax02.plot(si[n],depth_sed,'#4e9dda',linewidth=3, alpha = 1,linestyle= '--',zorder=9)                 
+                ax10.plot(ph[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax11.plot(ph[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax12.plot(ph[n],depth_sed,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)       
+
                 
             elif n >= 335 and n <365: #
                 ax00.plot(si[n],depth,self.winter,linewidth=self.linewidth)             
@@ -1336,11 +1482,31 @@ class Window(QtGui.QDialog):
         ax02.scatter(si_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                
         ax10.scatter(pH_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)
+                     s = 15,linewidth=0.5,zorder=10)
+        ax10.scatter(pH_pH,depth_pH,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.5,zorder=10)   
+        ax10.scatter(pH_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.5,zorder=10)            
         ax11.scatter(pH_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                 
+                     s = 15,linewidth=0.1,zorder=10)    
+        ax11.scatter(pH_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)            
+        ax11.scatter(pH_pH,depth_pH,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10) 
+        ax11.scatter(pH_pH_winter,depth_pH_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10)                          
         ax12.scatter(pH_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                              
+                     s = 15,linewidth=0.1,zorder=10) 
+        ax12.scatter(pH_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)           
+        ax12.scatter(pH_pH,sed_depth_pH,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10) 
+        ax12.scatter(pH_pH_winter,sed_depth_pH_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+                        
+#        depth_pH = data_pH[0][1:]
+#sed_depth_pH = data_pH[1][1:]
+#pH_pH = data_pH[2][1:]                          
         self.canvas.draw()
 
     def plot5(self): #function to define Mn,fe,O2
@@ -1453,7 +1619,7 @@ class Window(QtGui.QDialog):
 
                         
         for n in range(0,365):  
-            if n >= 0 and n <= 90:      #Winter                                 
+            if n >= 0 and n <= 18:      #Winter                                 
                 ax00.plot(mn2[n],depth,self.winter,linewidth=0.7)             
                 ax01.plot(mn2[n],depth,self.winter,linewidth=0.7)  
                 ax02.plot(mn2[n],depth_sed,self.winter,linewidth=0.7)                 
@@ -1464,6 +1630,30 @@ class Window(QtGui.QDialog):
                 ax20.plot(o2[n],depth,self.winter,linewidth=0.7) 
                 ax21.plot(o2[n],depth,self.winter,linewidth=0.7)  #
                 ax22.plot(o2[n],depth_sed,self.winter,linewidth=0.7)
+                
+            elif n >= 22 and n <= 90:      #Winter                                 
+                ax00.plot(mn2[n],depth,self.winter,linewidth=0.7)             
+                ax01.plot(mn2[n],depth,self.winter,linewidth=0.7)  
+                ax02.plot(mn2[n],depth_sed,self.winter,linewidth=0.7)                 
+                ax10.plot(fe2[n],depth,self.winter,linewidth=0.7)   
+                ax11.plot(fe2[n],depth,self.winter,linewidth=0.7)   
+                ax12.plot(fe2[n],depth_sed,self.winter,linewidth=0.7) 
+                
+                ax20.plot(o2[n],depth,self.winter,linewidth=0.7) 
+                ax21.plot(o2[n],depth,self.winter,linewidth=0.7)  #
+                ax22.plot(o2[n],depth_sed,self.winter,linewidth=0.7)      
+                          
+            elif n>=19 and n<=21: #winter to compare with field data
+                ax00.plot(mn2[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)             
+                ax01.plot(mn2[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)  
+                ax02.plot(mn2[n],depth_sed,'#4e9dda',linewidth=3, alpha = 1,linestyle= '--',zorder=9)                 
+                ax10.plot(fe2[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax11.plot(fe2[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax12.plot(fe2[n],depth_sed,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)       
+                ax20.plot(o2[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
+                ax21.plot(o2[n],depth,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9)   #marker='o',
+                ax22.plot(o2[n],depth_sed,'#4e9dda',linewidth=3,alpha = 1,linestyle= '--',zorder=9) #marker='o',                     
+                
             elif n >= 335 and n <365: #
                 ax00.plot(mn2[n],depth,self.winter,linewidth=0.7)             
                 ax01.plot(mn2[n],depth,self.winter,linewidth=0.7)  
@@ -1495,8 +1685,8 @@ class Window(QtGui.QDialog):
                 ax11.plot(fe2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
                 ax12.plot(fe2[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)       
                 ax20.plot(o2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
-                ax21.plot(o2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
-                ax22.plot(o2[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)                                  
+                ax21.plot(o2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   #marker='o',
+                ax22.plot(o2[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker = 'o', zorder=9) #marker='o',                                  
                          
             else:   #Spring and autumn
 
@@ -1508,9 +1698,9 @@ class Window(QtGui.QDialog):
                 ax11.plot(fe2[n],depth,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
                 ax12.plot(fe2[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = 0.5)   
 
-                ax20.plot(o2[n],depth,self.spring_autumn,linewidth=0.7) 
-                ax21.plot(o2[n],depth,self.spring_autumn,linewidth=0.7)  #
-                ax22.plot(o2[n],depth_sed,self.spring_autumn,linewidth=0.7) 
+                ax20.plot(o2[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn) 
+                ax21.plot(o2[n],depth,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn)  #
+                ax22.plot(o2[n],depth_sed,self.spring_autumn,linewidth=0.7, alpha = alpha_autumn) 
                 
                 
         ax00.scatter(mn_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
@@ -1518,23 +1708,55 @@ class Window(QtGui.QDialog):
         ax01.scatter(mn_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                               
         ax02.scatter(mn_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)          
+                     s = self.markersize,linewidth=0.5,zorder=10)    
+        ax00.scatter(mn_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        ax01.scatter(mn_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                               
+        ax02.scatter(mn_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+        
+        
+              
         ax10.scatter(fe_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
+        ax10.scatter(fe_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)      
+          
         ax11.scatter(fe_summer,depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         ax12.scatter(fe_summer,sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                      
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+
+        ax11.scatter(fe_winter,depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        ax12.scatter(fe_winter,sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        
+                             
         ax20.scatter(o2_o2,depth_o2,color='r' , alpha=1,edgecolor='#262626',
                      s = 5,linewidth=0.1,zorder=10) 
         ax21.scatter(o2_o2,depth_o2,color='r' , alpha=1,edgecolor='#262626',
                      s = 5,linewidth=0.1,zorder=10) 
-        ax22.scatter(o2_o2,sed_depth_o2,color='r' , alpha=1,edgecolor='#262626',
+        ax22.scatter(o2_o2,sed_depth_o2,color='r' ,alpha=1,edgecolor='#262626',
                      s = 5 ,linewidth=0.1,zorder=10)  
-                
+               
    
                                                 
         self.canvas.draw() 
+        
+        
+        
+#fig2 = plt.figure()
+#ax2 = fig2.add_subplot(111)
+#for n in range(0,365):                               
+#    ax2.plot(o2[n],depth,color='r', marker = 'o', linewidth=0.1)
+#ax2.set_ylim([5.95, 5.88])
+#ax2.yaxis.grid(True,'major')
+#ax2.yaxis.grid(True,'minor')
+#ax2.xaxis.grid(True,'major')
+#plt.show()
+
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
 
