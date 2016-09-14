@@ -79,7 +79,7 @@ values_winter=[]   # create empty matrix for storing data
 f_winter = None
 try:
     f_winter = open('winter.txt', 'rb')   
-    for i in range(0,79):        
+    for i in range(0,61):        
         line_winter = f_winter.readline()
         values_winter.append(line_winter.split())
   
