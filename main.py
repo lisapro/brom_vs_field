@@ -1602,13 +1602,13 @@ class Window(QtGui.QDialog):
             axis.xaxis.set_label_position('top')
             axis.xaxis.tick_top()
         for axis in (ax00, ax01):   
-            axis.set_xlim([mn2min,mn2max])
+            axis.set_xlim([mn2min,5])
             axis.set_xticks(np.arange(np.round(mn2min),np.ceil(mn2max)),((np.ceil(mn2max)-np.round(mn2min))/2))
-        ax02.set_xlim([sed_mn2min,sed_mn2max])    
+        ax02.set_xlim([sed_mn2min,31])    
         for axis in (ax10, ax11):
             watmin = min(fe_summermin,fe2min)
-            axis.set_xlim([watmin,fe2max])
-        ax12.set_xlim([sed_fe2min,sed_fe2max])    
+            axis.set_xlim([watmin,5])#fe2max
+        ax12.set_xlim([sed_fe2min,60])    
             
         for axis in (ax20, ax21):   
             axis.set_xlim([o2min,o2max])
@@ -1678,15 +1678,15 @@ class Window(QtGui.QDialog):
                 ax22.plot(o2[n],depth_sed,self.summer,linewidth=self.linewidth,alpha = self.alpha)              
                 
             elif n >= 236 and n < 240: #from 25 to 30 august               
-                ax00.plot(mn2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)             
-                ax01.plot(mn2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)  
-                ax02.plot(mn2[n],depth_sed,self.summer,linewidth=3, alpha = 1,linestyle= '--',zorder=9)                 
+                ax00.plot(mn2[n],depth,self.summer,linewidth=self.linewidth,zorder=9)             
+                ax01.plot(mn2[n],depth,self.summer,linewidth=self.linewidth)  
+                ax02.plot(mn2[n],depth_sed,self.summer,linewidth= self.linewidth)                 
                 ax10.plot(fe2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
                 ax11.plot(fe2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
                 ax12.plot(fe2[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)       
-                ax20.plot(o2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   
-                ax21.plot(o2[n],depth,self.summer,linewidth=3,alpha = 1,linestyle= '--',zorder=9)   #marker='o',
-                ax22.plot(o2[n],depth_sed,self.summer,linewidth=3,alpha = 1,linestyle= '--',marker = 'o', zorder=9) #marker='o',                                  
+                ax20.plot(o2[n],depth,self.summer,linewidth=self.linewidth)   
+                ax21.plot(o2[n],depth,self.summer,linewidth=self.linewidth)   #marker='o',
+                ax22.plot(o2[n],depth_sed,self.summer,linewidth=self.linewidth) #marker='o',                                  
                          
             else:   #Spring and autumn
 
