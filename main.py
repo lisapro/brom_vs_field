@@ -279,7 +279,7 @@ depth6_mnfe_winter = data_mnfe_winter[17][1:]
 
 ##########
 
-my_example_nc_file = 'BROM_Berre_out.nc'
+my_example_nc_file = 'BROM_out.nc'#'BROM_Berre_out.nc'
 fh = Dataset(my_example_nc_file, mode='r')
 
 depth = fh.variables['z'][:] #middle points
