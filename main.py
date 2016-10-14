@@ -37,23 +37,25 @@ class Window(QtGui.QDialog):
 
     xticks =(np.arange(0,100000))
     xticks1 =(np.arange(0,100))
-    wat_color = '#ffffff' #'#f9fafb'#'#c9ecfd' #colors for filling water,bbl and sedimnet 
-    bbl_color = '#ccd6de'#'#2873b8' 
+
+    wat_color = '#ffffff' # colors for filling water,bbl and sediment 
+    bbl_color = '#ccd6de' # for plot 1,2,3,4,5,1_1,2_2,etc.
     sed_color = '#a3abb1' #'#7a8085' #666b6f '#'#916012'
-    wat_color1 = '#c9ecfd' #colors for filling water,bbl and sedimnet 
-    bbl_color1 = '#2873b8' 
+        
+    wat_color1 = '#c9ecfd' #colors for filling water, bbl and sediment 
+    bbl_color1 = '#2873b8' # for fig1 and fig2 ( plot 6,6_1)
     sed_color1 = '#916012'    
-    
     
     alpha_wat = 0.3 # saturation of color (from 0 to 1) 
     alpha_bbl = 0.3
     alpha_sed = 0.5
     alpha_autumn = 0.5
-    winter = 'b'
-    spring_autumn = 'g'
-    summer = 'r'
+    spring_autumn ='#998970'#'#cecebd'#'#ffffd1'#'#e5e5d2'  
+    winter = '#8dc0e7' 
+    summer = '#d0576f' 
     linewidth = 0.5
     alpha = 0.5
+    markersize=25    
 #positions for different axes, sharing one subplot
     axis1 = 0
     axis2 = 27
@@ -67,7 +69,6 @@ class Window(QtGui.QDialog):
     labelaxis3_y = 1.26
     labelaxis4_y = 1.38
     labelaxis5_y = 1.48
-
     xlabel_fontsize = 14
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
@@ -88,26 +89,26 @@ class Window(QtGui.QDialog):
         # Create buttons connected to 'plot' and 'plot1' method
         self.button1 = QtGui.QPushButton(' PO4,SO4,O2 annual')  
         self.button1.setStyleSheet('QPushButton {background-color: #faebd7;}')    
-        self.button1_1 = QtGui.QPushButton('PO4,SO4,O2 chosen day')   
+        self.button1_1 = QtGui.QPushButton('add PO4,SO4,O2 field data')   
         self.button1_1.setStyleSheet('QPushButton {background-color: #d8ebff;}')                       
         self.button2 = QtGui.QPushButton('T,S,Kz annual')   
         self.button2.setStyleSheet('QPushButton {background-color: #faebd7;}')       
-        self.button2_1 = QtGui.QPushButton('T,S,Kz chosen day')
+        self.button2_1 = QtGui.QPushButton('add T,S,Kz field data')
         self.button2_1.setStyleSheet('QPushButton {background-color: #d8ebff;}')                       
         self.button3 = QtGui.QPushButton(' NO2,NO3,NH4 annual') 
         self.button3.setStyleSheet('QPushButton {background-color: #faebd7;}')  #color: red;              
-        self.button3_1 = QtGui.QPushButton('NO2,NO3,NH4 chosen day')          
+        self.button3_1 = QtGui.QPushButton('add NO2,NO3,NH4 field data')          
         self.button3_1.setStyleSheet('QPushButton {background-color: #d8ebff;}')         
         self.button4 = QtGui.QPushButton(' Si,pH annual')  
         self.button4.setStyleSheet('QPushButton {background-color: #faebd7;}')  #color: red;                
-        self.button4_1 = QtGui.QPushButton('Si,pH chosen day')   
+        self.button4_1 = QtGui.QPushButton('add Si,pH field data')   
         self.button4_1.setStyleSheet('QPushButton {background-color: #d8ebff;}')                      
         self.button5 = QtGui.QPushButton('Mn,Fe,H2S annual')  
         self.button5.setStyleSheet('QPushButton {background-color: #faebd7;}')  #color: red;              
-        self.button5_1 = QtGui.QPushButton(' Mn,Fe,H2S chosen day')   
+        self.button5_1 = QtGui.QPushButton('add Mn,Fe,H2S field data')   
         self.button5_1.setStyleSheet('QPushButton {background-color: #d8ebff;}')                 
 #        self.openFile = QtGui.QAction(QtGui.QIcon('open.png'), 'Open', self)        
-        self.openFile = QtGui.QPushButton('Open new File')
+        self.openFile = QtGui.QPushButton('   ')
         self.openFile.setStyleSheet('QPushButton {background-color: #c7d2d2;}')                  
 #        self.numday = QtGui.QPushButton('Choose day to plot')    
         self.numdaySpinBox = QSpinBox()
@@ -121,18 +122,23 @@ class Window(QtGui.QDialog):
         self.button6_1.setStyleSheet('QPushButton {background-color: #b3cc99 ;}')
                                    
         self.openFile.setShortcut('Ctrl+O')
-        self.openFile.setStatusTip('Open new File')
+#        self.openFile.setStatusTip('Open new File')
 #        self.openFile.triggered.connect(self.showDialog)
                                     
 
         self.button1.clicked.connect(self.plot1) #Plot PO4,SO4,o2 
+        self.button1_1.clicked.connect(self.plot1_field) #Plot field data for PO4,SO4,o2         
         self.button2.clicked.connect(self.plot2) #Plot T,S,Kz
+        self.button2_1.clicked.connect(self.plot2_field)
         self.button3.clicked.connect(self.plot3) #Plot NO2,NO3,NH4   
+        self.button3_1.clicked.connect(self.plot3_field)
         self.button4.clicked.connect(self.plot4) #Plot Si,pH 
+        self.button4_1.clicked.connect(self.plot4_field) #Plot Si,pH      
         self.button5.clicked.connect(self.plot5) #Plot Mn,Fe,O2  
+        self.button5_1.clicked.connect(self.plot5_field) #Plot Mn,Fe,O2          
         self.button6.clicked.connect(self.plot6) #  
         self.button6_1.clicked.connect(self.plot6_1) #               
-        self.openFile.clicked.connect(self.showDialog) #Plot PO4,SO4,o2                                        
+#        self.openFile.clicked.connect(self.showDialog) #Plot PO4,SO4,o2                                        
 #        self.numdaySpinBox = QSpinBox()
 #        self.Daylabel = QLabel('Choose day to plot:')
 #        self.numdaySpinBox.setRange(1, 366)
@@ -237,7 +243,7 @@ class Window(QtGui.QDialog):
         self.calculate_sedmin()          
         self.calculate_sedmax()   
         self.maxmin()
-        
+        self.read_fielddata()        
         fh.close()
                 
     def calculate_watmax(self):
@@ -431,17 +437,26 @@ class Window(QtGui.QDialog):
 
     def watmax(self,variable):
         n = variable[:,self.y1min:self.ny2max].max()#+ ((variable[:,y1min:y2max].max())/10))
-
+        
+        
+        if n > 28000:
+            n = 30000#np.ceil(n)        
+        if n > 27000:
+            n = 28000#np.ceil(n)
         if n > 26000:
-            n = 30000#np.ceil(n)
+            n = 27000#np.ceil(n)
         if n > 25000:
             n = 26000#np.ceil(n)
+        elif n > 22500:
+            n = 25000#np.ceil(n)              
         elif n > 20000:
-            n = 25000#np.ceil(n)            
+            n = 22500#np.ceil(n)            
         elif n > 10000:
-            n = 20000#np.ceil(n)            
-        elif n > 5000 and n <= 10000:  
-            n = 10000         
+            n = 20000#np.ceil(n)    
+        elif n > 7000 and n <= 10000:  
+            n = 10000                     
+        elif n > 5000 and n <= 7000:  
+            n =7000         
         elif n > 1000 and n <= 5000:  
             n = 5000        
         elif n > 500 and n <= 1000:  
@@ -451,11 +466,23 @@ class Window(QtGui.QDialog):
         elif n > 200 and n <= 350:  
             n = 350          
         elif n > 100 and n <= 200:  
-            n = 200         
-        elif n > 10 and n <= 100:
-            n = 100     
-        elif n > 0.5 and n <= 10:
-            n = 10          
+            n = 200   
+            
+        elif n > 50 and n <= 100:
+            n = 100    
+        elif n > 25 and n <= 50:
+            n = 50                             
+        elif n > 10 and n <= 25:
+            n = 25    
+             
+        elif n > 5 and n <= 10:
+            n = 10
+        elif n > 2.5 and n <= 5:
+            n = 5      
+        elif n > 1 and n <= 2.5:
+            n = 2.5                     
+        elif n > 0.5 and n <= 1:
+            n = 1                     
         elif n > 0.05 and n <= 0.5:
             n = 0.5           
         elif n > 0.005 and n <= 0.05:
@@ -475,16 +502,24 @@ class Window(QtGui.QDialog):
     def sedmax(self,variable):
         n = np.ceil(variable[:,self.ny2min:].max())# + ((variable[:,ysedmin:ysedmax].max()))) #np.ceil   
         
+        if n > 28000:
+            n = 30000#np.ceil(n)        
+        if n > 27000:
+            n = 28000#np.ceil(n)
         if n > 26000:
-            n = 30000#np.ceil(n)
+            n = 27000#np.ceil(n)
         if n > 25000:
             n = 26000#np.ceil(n)
+        elif n > 22500:
+            n = 25000#np.ceil(n)              
         elif n > 20000:
-            n = 25000#np.ceil(n)            
+            n = 22500#np.ceil(n)            
         elif n > 10000:
-            n = 20000#np.ceil(n)            
-        elif n > 5000 and n <= 10000:  
-            n = 10000         
+            n = 20000#np.ceil(n)    
+        elif n > 7000 and n <= 10000:  
+            n = 10000                     
+        elif n > 5000 and n <= 7000:  
+            n =7000         
         elif n > 1000 and n <= 5000:  
             n = 5000        
         elif n > 500 and n <= 1000:  
@@ -494,11 +529,23 @@ class Window(QtGui.QDialog):
         elif n > 200 and n <= 350:  
             n = 350          
         elif n > 100 and n <= 200:  
-            n = 200         
-        elif n > 10 and n <= 100:
-            n = 100     
-        elif n > 0.5 and n <= 10:
-            n = 10          
+            n = 200   
+            
+        elif n > 50 and n <= 100:
+            n = 100    
+        elif n > 25 and n <= 50:
+            n = 50                             
+        elif n > 10 and n <= 25:
+            n = 25    
+             
+        elif n > 5 and n <= 10:
+            n = 10
+        elif n > 2.5 and n <= 5:
+            n = 5      
+        elif n > 1 and n <= 2.5:
+            n = 2.5                     
+        elif n > 0.5 and n <= 1:
+            n = 1                     
         elif n > 0.05 and n <= 0.5:
             n = 0.5           
         elif n > 0.005 and n <= 0.05:
@@ -697,7 +744,224 @@ class Window(QtGui.QDialog):
         self.sed_om_armin = self.sedmin(self.om_ar)
         self.sed_om_armax = self.sedmax(self.om_ar)         
         
-                                                                                         
+    def read_fielddata(self):
+        values_summer=[]   # create empty matrix for storing data
+#        f = None
+        try:
+            f_summer = open('summer.txt', 'rb')   # Read file with summer water column data 
+            for i in range(0,85):        
+                line1 = f_summer.readline()
+                values_summer.append(line1.split())
+          
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_summer:
+                f_summer.close()
+            print("(Cleaning up: Read and closed the file Summer)")
+        
+        data_summer = zip(*values_summer)
+        self.depth_summer = data_summer[0][1:]
+        self.pH_summer = data_summer[1][1:]
+        self.sal_summer = data_summer[2][1:]
+        self.na_summer = data_summer[3][1:]
+        
+        self.so4_summer = data_summer[8][1:]
+        self.no3_summer = data_summer[9][1:]
+        self.no2_summer = data_summer[10][1:]
+        self.nh4_summer = data_summer[11][1:]
+        self.si_summer = data_summer[12][1:]
+        
+        self.po4_summer = data_summer[14][1:]
+        
+        self.mn_summer = data_summer[15][1:]
+        self.fe_summer = data_summer[16][1:]
+        self.date_summer = data_summer[17][1:]
+        self.sed_depth_summer = data_summer[18][1:]
+        self.h2s_summer = data_summer[19][1:]
+        
+        
+        values_winter=[]   # create empty matrix for storing data
+        f_winter = None
+        try:
+            f_winter = open('winter.txt', 'rb')   
+            for i in range(0,61):        
+                line_winter = f_winter.readline()
+                values_winter.append(line_winter.split())
+          
+                    
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_winter:
+                f_winter.close()
+            print("(Cleaning up: Read and closed the file Winter)")
+        
+        data_winter = zip(*values_winter)
+        
+        
+        #print values_winter
+        self.depth_winter = data_winter[0][1:]
+        self.pH_winter = data_winter[1][1:]
+        self.sal_winter = data_winter[2][1:]
+        self.na_winter = data_winter[3][1:]
+        self.so4_winter = data_winter[8][1:]
+        self.no3_winter = data_winter[9][1:]
+        self.no2_winter = data_winter[10][1:]
+        self.nh4_winter = data_winter[11][1:]
+        self.si_winter = data_winter[12][1:]
+        self.po4_winter = data_winter[14][1:] 
+        self.mn_winter = data_winter[15][1:]
+        self.fe_winter = data_winter[16][1:]
+        self.date_winter = data_winter[17][1:]
+        self.sed_depth_winter = data_winter[18][1:]
+        self.h2s_winter = data_winter[19][1:]
+        
+
+        
+        values_o2=[]   # create empty matrix for storing data
+#        fo2 = None
+        try:
+            f_o2 = open('o2.txt', 'rb')   
+            while True:
+                line_o2 = f_o2.readline()
+                if len(line_o2) == 0:
+                    break
+                values_o2.append(line_o2.split())        
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_o2:
+                f_o2.close()
+            print("(Cleaning up: Read and closed the file O2)")
+        data_o2 = zip(*values_o2)
+        self.depth_o2 = data_o2[0][1:]
+        self.sed_depth_o2 = data_o2[1][1:]
+        self.o2_o2 = data_o2[2][1:]
+        
+        
+        values_pH=[]   # create empty matrix for storing data
+        #fpH = None
+        try:
+            f_pH = open('pH.txt', 'rb')   
+            while True:
+                line_pH = f_pH.readline()
+                if len(line_pH) == 0:
+                    break
+                values_pH.append(line_pH.split())        
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_pH:
+                f_pH.close()
+            print("(Cleaning up: Read and closed the file pH)")
+        data_pH = zip(*values_pH)
+        self.depth_pH = data_pH[0][1:]
+        self.sed_depth_pH = data_pH[1][1:]
+        self.pH_pH = data_pH[2][1:]
+        
+        
+        values_pH_winter=[]   # create empty matrix for storing data
+        #fpH = None
+        try:
+            f_pH_winter = open('pH_winter.txt', 'rb')   
+            while True:
+                line_pH_winter = f_pH_winter.readline()
+                if len(line_pH_winter) == 0:
+                    break
+                values_pH_winter.append(line_pH_winter.split())        
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_pH_winter:
+                f_pH_winter.close()
+            print("(Cleaning up: Read and closed the file pH_winter)")
+            
+        data_pH_winter = zip(*values_pH_winter)
+        self.depth_pH_winter = data_pH_winter[0][1:]
+        self.sed_depth_pH_winter = data_pH_winter[1][1:]
+        self.pH_pH_winter = data_pH_winter[2][1:]
+        
+        #############
+        values_mnfe_summer=[]   # create empty matrix for storing data
+        #f1 = None
+        try:
+            f_mnfe_summer = open('mnfe_summer.txt', 'rb')   # Read file with summer water column data 
+            for i in range(0,17):        
+                line1 = f_mnfe_summer.readline()
+                values_mnfe_summer.append(line1.split())
+          
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_mnfe_summer:
+                f_mnfe_summer.close()
+            print("(Cleaning up: Read and closed the file Summer)")
+        
+        data_mnfe_summer = zip(*values_mnfe_summer)
+        self.depth1_mnfe_summer = data_mnfe_summer[0][1:]
+        self.mn1_summer = data_mnfe_summer[1][1:]
+        self.fe1_summer = data_mnfe_summer[2][1:]
+        self.depth2_mnfe_summer = data_mnfe_summer[3][1:]
+        self.mn2_summer = data_mnfe_summer[4][1:]
+        self.fe2_summer = data_mnfe_summer[5][1:]
+        self.depth3_mnfe_summer = data_mnfe_summer[6][1:]
+        self.mn3_summer = data_mnfe_summer[7][1:]
+        self.fe3_summer = data_mnfe_summer[8][1:]
+        
+        
+        values_mnfe_winter=[]   # create empty matrix for storing data
+        #f1 = None
+        try:
+            f_mnfe_winter = open('mnfe_winter.txt', 'rb')   # Read file with summer water column data 
+            for i in range(0,13):        
+                line1 = f_mnfe_winter.readline()
+                values_mnfe_winter.append(line1.split())
+          
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_mnfe_winter:
+                f_mnfe_winter.close()
+            print("(Cleaning up: Read and closed the file mnfe winter)")
+        
+        data_mnfe_winter = zip(*values_mnfe_winter)
+        
+        self.mn1_winter = data_mnfe_winter[0][1:]
+        self.fe1_winter = data_mnfe_winter[1][1:]
+        self.depth1_mnfe_winter = data_mnfe_winter[2][1:]
+        self.mn2_winter = data_mnfe_winter[3][1:]
+        self.fe2_winter = data_mnfe_winter[4][1:]
+        self.depth2_mnfe_winter = data_mnfe_winter[5][1:]
+        self.mn3_winter = data_mnfe_winter[6][1:]
+        self.fe3_winter = data_mnfe_winter[7][1:]
+        self.depth3_mnfe_winter = data_mnfe_winter[8][1:]
+        self.mn4_winter = data_mnfe_winter[9][1:]
+        self.fe4_winter = data_mnfe_winter[10][1:]
+        self.depth4_mnfe_winter = data_mnfe_winter[11][1:]
+        self.mn5_winter = data_mnfe_winter[12][1:]
+        self.fe5_winter = data_mnfe_winter[13][1:]
+        self.depth5_mnfe_winter = data_mnfe_winter[14][1:]
+        self.mn6_winter = data_mnfe_winter[15][1:]
+        self.fe6_winter = data_mnfe_winter[16][1:]
+        self.depth6_mnfe_winter = data_mnfe_winter[17][1:] 
+        
+        
+                                                                                             
     def plot1(self): #function to define 1 figure PO4,SO4,o2
         plt.clf() #clear figure before updating 
         gs = gridspec.GridSpec(3, 3) 
@@ -745,14 +1009,16 @@ class Window(QtGui.QDialog):
             
         for axis in (self.ax10, self.ax11):
 
-            
+ 
             axis.xaxis.set_label_position('top')
             axis.xaxis.tick_top()                        
 #            watmin = min(15000,so4min)#so4_lastmin
             axis.set_xlim([self.so4min,self.so4max])
+            axis.set_xticks(np.arange(self.so4min,self.so4max+((self.so4max-self.so4min)/2.),((self.so4max-self.so4min)/2.)))             
             self.ax12.xaxis.tick_top() 
             self.ax12.set_xlim([self.sed_so4min,self.sed_so4max])    
-            
+            self.ax12.set_xticks(np.arange(self.sed_so4min,self.sed_so4max+((self.sed_so4max-self.sed_so4min)/2.),
+                                      ((self.sed_so4max-self.sed_so4min)/2.)))              
         for axis in (self.ax20, self.ax21):              
                       
             axis.xaxis.set_label_position('top')  
@@ -890,7 +1156,55 @@ class Window(QtGui.QDialog):
          
          
         self.canvas.draw()
+
+
+                         
+    def plot1_field(self): # function to plot PO4,SO4,O2 field data
+
+#        self.read_fielddata()
         
+        self.ax00.scatter(self.po4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax10.scatter(self.so4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+
+        self.ax01.scatter(self.po4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        self.ax11.scatter(self.so4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax21.scatter(self.h2s_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                   
+        self.ax02.scatter(self.po4_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+        self.ax12.scatter(self.so4_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)    
+       
+        self.ax00.scatter(self.po4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax10.scatter(self.so4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+                    
+        self.ax01.scatter(self.po4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)       
+        self.ax11.scatter(self.so4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+
+        self.ax02.scatter(self.po4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)       
+        self.ax12.scatter(self.so4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+         
+        self.ax20.scatter(self.o2_o2,self.depth_o2,color='r' , alpha=1,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        self.ax21.scatter(self.o2_o2,self.depth_o2,color='r' , alpha=1,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        self.ax22.scatter(self.o2_o2,self.sed_depth_o2,color='r' ,alpha=1,edgecolor='#262626',
+                     s = 5 ,linewidth=0.1,zorder=10)         
+        
+                                  
+        self.canvas.draw()
+        
+           
     def plot2(self): # function to define 2 figure T,S,Kz  
         plt.clf() #clear figure before updating         
         gs = gridspec.GridSpec(3, 3) 
@@ -944,7 +1258,7 @@ class Window(QtGui.QDialog):
             axis.xaxis.tick_top()
         for axis in (self.ax00, self.ax01, self.ax02):              
             axis.set_xlim([self.tempmin,self.tempmax])
-            axis.set_xticks(np.arange(np.round(self.tempmin),np.ceil(self.tempmax)),((np.ceil(self.tempmax)-np.round(self.tempmin))/2))
+#            axis.set_xticks(np.arange(np.round(self.tempmin),np.ceil(self.tempmax)),((np.ceil(self.tempmax)-np.round(self.tempmin))/2))
 
         for axis in (self.ax10, self.ax11, self.ax12):              
             axis.set_xlim([self.salmin,self.salmax]) 
@@ -1039,6 +1353,25 @@ class Window(QtGui.QDialog):
                                 
         self.canvas.draw()
    
+    def plot2_field(self):
+        
+#        self.read_fielddata()  
+              
+        self.ax10.scatter(self.sal_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)   
+        self.ax10.scatter(self.sal_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)   
+        self.ax11.scatter(self.sal_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax11.scatter(self.sal_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax12.scatter(self.sal_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)   
+        self.ax12.scatter(self.sal_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        
+        self.canvas.draw()
+        
     def plot3(self): #function to define 1 figure NO2,NO3,NH4
         plt.clf() #clear figure before updating 
         gs = gridspec.GridSpec(3, 3) 
@@ -1200,7 +1533,51 @@ class Window(QtGui.QDialog):
             self.y_lim(axis) 
                                                     
         self.canvas.draw()   
-   
+    def plot3_field(self): #NO2,NO3,NH4  
+        
+        self.ax00.scatter(self.no2_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax00.scatter(self.no2_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax01.scatter(self.no2_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax01.scatter(self.no2_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                                             
+        self.ax02.scatter(self.no2_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)     
+        self.ax02.scatter(self.no2_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+                   
+        self.ax10.scatter(self.no3_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax10.scatter(self.no3_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax11.scatter(self.no3_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        self.ax11.scatter(self.no3_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+                  
+        self.ax12.scatter(self.no3_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)      
+        self.ax12.scatter(self.no3_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+                                 
+        self.ax20.scatter(self.nh4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        self.ax20.scatter(self.nh4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax21.scatter(self.nh4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        self.ax21.scatter(self.nh4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+               
+        self.ax22.scatter(self.nh4_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax22.scatter(self.nh4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)     
+        
+        
+        self.canvas.draw()    
     def plot4(self): #function to define 1 figure Si,pH
         plt.clf() #clear figure before updating 
 
@@ -1253,17 +1630,12 @@ class Window(QtGui.QDialog):
             axis.xaxis.set_label_position('top')
             axis.xaxis.tick_top()
         for axis in (self.ax00, self.ax01): 
-
             axis.set_xlim([self.simin,self.simax])
-            axis.set_xticks(np.arange(np.round(self.simin),np.ceil(self.simax)),
-                            ((np.ceil(self.simax)-np.round(self.simin))/2))
-        self.ax02.set_xlim([self.sed_simin,self.sed_simax])    
+        self.ax02.set_xlim([self.sed_simin,self.sed_simax])  
+          
         for axis in (self.ax10, self.ax11):
-#            watmin = min(pH_summermin,phmin)
-
-            axis.set_xlim([self.phmin,self.phmax+0.1])
-#            axis.set_xticks(np.arange(np.round(phmin),np.ceil(simax)),((np.ceil(simax)-np.round(simin))/2))            
-        self.ax12.set_xlim([self.sed_phmin,self.sed_phmax+0.3])    
+            axis.set_xlim([self.phmin,self.phmax])        
+        self.ax12.set_xlim([self.sed_phmin,self.sed_phmax])    
                    
 
 # Plot Field data        
@@ -1357,8 +1729,39 @@ class Window(QtGui.QDialog):
                        
                       
         self.canvas.draw()
-
+    def plot4_field(self):   # Si,pH
+        self.ax00.scatter(self.si_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax01.scatter(self.si_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax02.scatter(self.si_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                
+        self.ax10.scatter(self.pH_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.5,zorder=10)
+        self.ax10.scatter(self.pH_pH,self.depth_pH,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.5,zorder=10)   
+        self.ax10.scatter(self.pH_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.5,zorder=10)            
+        self.ax11.scatter(self.pH_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)    
+        self.ax11.scatter(self.pH_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)            
+        self.ax11.scatter(self.pH_pH,self.depth_pH,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10) 
+        self.ax11.scatter(self.pH_pH_winter,self.depth_pH_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10)                          
+        self.ax12.scatter(self.pH_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10) 
+        self.ax12.scatter(self.pH_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)           
+        self.ax12.scatter(self.pH_pH,self.sed_depth_pH,color='r' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10) 
+        self.ax12.scatter(self.pH_pH_winter,self.sed_depth_pH_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        
+        self.canvas.draw()    
     def plot5(self): #function to define Mn,fe,h2s
+
         plt.clf() #clear figure before updating 
         gs = gridspec.GridSpec(3, 3) 
         gs.update(left=0.06, right=0.93,top = 0.94,bottom = 0.04, wspace=0.2,hspace=0.1)
@@ -1519,7 +1922,49 @@ class Window(QtGui.QDialog):
             self.y_lim(axis) 
             
         self.canvas.draw() 
+    def plot5_field(self): #Mn,fe,h2s  
+      
+      
+        self.ax00.scatter(self.mn_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax01.scatter(self.mn_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                               
+        self.ax02.scatter(self.mn_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)    
+        self.ax00.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax01.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                               
+        self.ax02.scatter(self.mn_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+                      
+        self.ax10.scatter(self.fe_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax10.scatter(self.fe_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)      
+          
+        self.ax11.scatter(self.fe_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax12.scatter(self.fe_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
 
+        self.ax11.scatter(self.fe_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax12.scatter(self.fe_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax20.scatter(self.h2s_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                                     
+        self.ax21.scatter(self.h2s_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+        self.ax22.scatter(self.h2s_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax20.scatter(self.h2s_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)           
+        self.ax21.scatter(self.h2s_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        self.ax22.scatter(self.h2s_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.canvas.draw()    
     def plot6(self): # function to define 1 figure
         plt.clf() #clear figure before updating 
         self.numday = self.numdaySpinBox.value() #take the input value of numday spinbox
@@ -1868,7 +2313,7 @@ class Window(QtGui.QDialog):
         xycoords='axes fraction',  fontsize = self.xlabel_fontsize,color='r')                                                             
         for axis in (self.ax40_3, self.ax41_3):  
             axis.set_xlim([0,self.fesmax])
-            axis.set_xticks(np.arange(0,self.fesmax+(self.fesmax /2.),(self.fesmax/2.))) 
+            axis.set_xticks(np.arange(0,self.fesmax+(self.fesmax),(self.fesmax))) 
             axis.xaxis.set_major_formatter(mtick.FormatStrFormatter('%.1e'))                  
         self.ax42_3.set_xlim([0,self.sed_fesmax])
         self.ax42_3.set_xticks(np.arange(0,self.sed_fesmax+(self.sed_fesmax /2.),(self.sed_fesmax/2.)))   
@@ -1885,13 +2330,16 @@ class Window(QtGui.QDialog):
         self.ax42_4.annotate(r'$\rm FeS _2 $', xy=(self.labelaxis_x,self.labelaxis4_y), ha='left', va='center',
         xycoords='axes fraction',  fontsize = self.xlabel_fontsize, color='m')
         self.ax40_4.annotate(r'$\rm FeS _2 $', xy=(self.labelaxis_x,self.labelaxis4_y), ha='left', va='bottom',
-        xycoords='axes fraction',  fontsize = self.xlabel_fontsize, color='m')                               
+        xycoords='axes fraction',  fontsize = self.xlabel_fontsize, color='m')     
+                                  
         for axis in (self.ax50,self.ax50_1, self.ax51_1,self.ax51):  
-            axis.set_xlim([0,self.so4max])
-            axis.set_xticks(np.arange(0,self.so4max+(self.so4max/2.),(self.so4max/2.)))  
+            axis.set_xlim([self.so4min,self.so4max])
+            axis.set_xticks(np.arange(self.so4min,self.so4max+((self.so4max-self.so4min)/2.),((self.so4max-self.so4min)/2.)))              
+#            axis.set_xticks(np.arange(0,self.so4max+(self.so4max/2.),(self.so4max/2.)))  
         for axis in (self.ax52, self.ax52_1):
-            axis.set_xlim([0,self.sed_so4max])
-            axis.set_xticks(np.arange(0,self.sed_so4max+(self.sed_so4max/2.),(self.sed_so4max/2.)))  
+            axis.set_xlim([self.sed_so4min,self.sed_so4max])
+            axis.set_xticks(np.arange(self.sed_so4min,self.sed_so4max+((self.sed_so4max-self.sed_so4min)/2.),
+                                      ((self.sed_so4max-self.sed_so4min)/2.)))  
             axis.annotate(r'$\rm SO _4 $', xy=(self.labelaxis_x,self.labelaxis1_y), ha='left', va='center',
             xycoords='axes fraction',  fontsize = self.xlabel_fontsize, color='g')   
             self.ax50_1.annotate(r'$\rm SO _4 $', xy=(self.labelaxis_x,self.labelaxis1_y), ha='left', va='bottom',
@@ -1955,10 +2403,12 @@ class Window(QtGui.QDialog):
                        
         self.ax20_1.plot(self.po4[self.numday], self.depth, 'g-') 
         self.ax21_1.plot(self.po4[self.numday], self.depth, 'go-') 
-        self.ax22_1.plot(self.po4[self.numday], self.depth_sed, 'go-')                
-        self.ax20_2.plot(self.pon[self.numday], self.depth_sed, 'r-')
+        self.ax22_1.plot(self.po4[self.numday], self.depth_sed, 'go-')  
+                      
+        self.ax20_2.plot(self.pon[self.numday], self.depth, 'r-')
         self.ax21_2.plot(self.pon[self.numday], self.depth, 'ro-')
-        self.ax22_2.plot(self.pon[self.numday], self.depth_sed, 'ro-')                
+        self.ax22_2.plot(self.pon[self.numday], self.depth_sed, 'ro-')   
+                     
         self.ax20_3.plot(self.don[self.numday], self.depth, 'b-') 
         self.ax21_3.plot(self.don[self.numday], self.depth, 'bo-')  
         self.ax22_3.plot(self.don[self.numday], self.depth_sed, 'bo-')                
@@ -2243,12 +2693,13 @@ class Window(QtGui.QDialog):
             xycoords='axes fraction',  fontsize = self.xlabel_fontsize,color='r')                                                                                                                                                                                            
         for axis in (self.ax30, self.ax30_1,  self.ax31_1, self.ax31):  
             axis.set_xlim([self.alkmin,self.alkmax])
-            axis.set_xticks(np.arange(self.alkmin,(round(self.alkmax+(
-                            (self.alkmax - self.alkmin)/2.),5)),((self.alkmax - self.alkmin)/2.)))                                  
+            axis.set_xticks(np.arange(self.alkmin,(self.alkmax+(self.alkmax - self.alkmin)/2.),((self.alkmax - self.alkmin)/2.)))                                  
         for axis in ( self.ax32,  self.ax32_1):  
             axis.set_xlim([self.sed_alkmin,self.sed_alkmax])
-            axis.set_xticks(np.arange(self.sed_alkmin,(round(self.sed_alkmax+(
-                            (self.sed_alkmax - self.sed_alkmin)/2.),5)),((self.sed_alkmax - self.sed_alkmin)/2.)))                                      
+            axis.set_xticks(np.arange(self.sed_alkmin,(self.sed_alkmax+(self.sed_alkmax - self.sed_alkmin)/2.),
+                                      ((self.sed_alkmax - self.sed_alkmin)/2.)))            
+#            axis.set_xticks(np.arange(self.sed_alkmin,(round(self.sed_alkmax+(
+#                            (self.sed_alkmax - self.sed_alkmin)/2.),5)),((self.sed_alkmax - self.sed_alkmin)/2.)))                                      
             axis.annotate(r'$\rm Alk $', xy=(self.labelaxis_x,self.labelaxis1_y), ha='left', va='center',
             xycoords='axes fraction',  fontsize = self.xlabel_fontsize,color='g')    
             self.ax30_1.annotate(r'$\rm Alk $', xy=(self.labelaxis_x,self.labelaxis1_y), ha='left', va='bottom',
