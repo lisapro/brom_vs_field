@@ -496,8 +496,64 @@ class Window(QtGui.QDialog):
         return n 
 
     def watmin(self,variable):
-        self.n = np.round(variable[:,0:self.ny2max].min())
-        return self.n
+        n = np.round(variable[:,0:self.ny2max].min())
+            
+        if n >= 28000:
+            n = 28000 #np.ceil(n)        
+        if n >= 27000 and n < 28000:
+            n = 27000#np.ceil(n)
+        if n >= 26000 and n < 27000:
+            n = 26000#np.ceil(n)
+        if n >= 25000 and n < 26000:
+            n = 25000#np.ceil(n)
+        elif n >= 22500 and n < 25000 :
+            n = 22500#np.ceil(n)              
+        elif n >= 20000 and n < 22500:
+            n = 20000#np.ceil(n)            
+        elif n >= 10000 and n < 20000:
+            n = 10000#np.ceil(n)    
+        elif n >= 7000 and n < 10000:  
+            n = 7000                     
+        elif n >= 5000 and n < 7000:  
+            n =5000         
+        elif n >= 1000 and n < 5000:  
+            n = 1000        
+        elif n >= 500 and n < 1000:  
+            n = 500 
+        elif n >= 350 and n < 500:  
+            n = 350                       
+        elif n >= 200 and n < 350:  
+            n = 200          
+        elif n >= 100 and n < 200:  
+            n = 100   
+            
+        elif n >= 50 and n < 100:
+            n = 50    
+        elif n >= 25 and n < 50:
+            n = 25                             
+        elif n >= 10 and n < 25:
+            n = 10    
+             
+        elif n >= 5 and n < 10:
+            n = 5
+        elif n >= 2.5 and n < 5:
+            n = 2.5     
+        elif n >= 1 and n < 2.5:
+            n = 1                     
+        elif n >=  0.5 and n <1:
+            n = 0.5                     
+        elif n >= 0.05 and n < 0.5:
+            n = 0.05           
+        elif n >=  0.005 and n <0.05:
+            n = 0.005         
+        elif n >=  0.0005 and n <= 0.005:
+            n = 0.0005
+        elif n >=  0.00005 and  n  <0.0005 :
+            n = 0.00005   
+           
+#        return n         
+                
+        return n
     
     def sedmax(self,variable):
         n = np.ceil(variable[:,self.ny2min:].max())# + ((variable[:,ysedmin:ysedmax].max()))) #np.ceil   
@@ -560,6 +616,62 @@ class Window(QtGui.QDialog):
        
     def sedmin(self,variable):
         n = variable[:,self.ny2min:].min()
+        if n >= 28000:
+            n = 28000 #np.ceil(n)        
+        if n >= 27000 and n < 28000:
+            n = 27000#np.ceil(n)
+        if n >= 26000 and n < 27000:
+            n = 26000#np.ceil(n)
+        if n >= 25000 and n < 26000:
+            n = 25000#np.ceil(n)
+        elif n >= 22500 and n < 25000 :
+            n = 22500#np.ceil(n)              
+        elif n >= 20000 and n < 22500:
+            n = 20000#np.ceil(n)            
+        elif n >= 10000 and n < 20000:
+            n = 10000#np.ceil(n)    
+        elif n >= 7000 and n < 10000:  
+            n = 7000                     
+        elif n >= 5000 and n < 7000:  
+            n =5000         
+        elif n >= 1000 and n < 5000:  
+            n = 1000        
+        elif n >= 500 and n < 1000:  
+            n = 500 
+        elif n >= 350 and n < 500:  
+            n = 350                       
+        elif n >= 200 and n < 350:  
+            n = 200          
+        elif n >= 100 and n < 200:  
+            n = 100   
+            
+        elif n >= 50 and n < 100:
+            n = 50    
+        elif n >= 25 and n < 50:
+            n = 25                             
+        elif n >= 10 and n < 25:
+            n = 10    
+             
+        elif n >= 5 and n < 10:
+            n = 5
+        elif n >= 2.5 and n < 5:
+            n = 2.5     
+        elif n >= 1 and n < 2.5:
+            n = 1                     
+        elif n >=  0.5 and n <1:
+            n = 0.5                     
+        elif n >= 0.05 and n < 0.5:
+            n = 0.05           
+        elif n >=  0.005 and n <0.05:
+            n = 0.005         
+        elif n >=  0.0005 and n <= 0.005:
+            n = 0.0005
+        elif n >=  0.00005 and  n  <0.0005 :
+            n = 0.00005           
+        
+        
+        
+        
         return n
     
     def maxmin(self):
@@ -2163,9 +2275,9 @@ class Window(QtGui.QDialog):
             axis.set_xlim([self.salmin,self.salmax])
             axis.set_xticks(np.arange(self.salmin,self.salmax+((self.salmax - self.salmin)/2.),((self.salmax - self.salmin)/2.))) 
         self.ax02_2.annotate(r'$\rm S $', xy=(self.labelaxis_x,self.labelaxis2_y), ha='left', va='center',
-            xycoords='axes fraction',  fontsize = self.xlabel_fontsize,color='b')
+            xycoords='axes fraction',  fontsize = self.xlabel_fontsize,color='r')
         self.ax00_2.annotate(r'$\rm S $', xy=(self.labelaxis_x,self.labelaxis2_y), ha='left', va='center',
-            xycoords='axes fraction',  fontsize = self.xlabel_fontsize,color='b') 
+            xycoords='axes fraction',  fontsize = self.xlabel_fontsize,color='r') 
                              
         for axis in ( self.ax00_3,  self.ax01_3,self.ax02_3):   
             axis.set_xlim([self.tempmin,self.tempmax])
