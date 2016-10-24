@@ -534,8 +534,10 @@ class Window(QtGui.QDialog):
         elif n >= 10 and n < 25:
             n = 10    
              
-        elif n >= 5 and n < 10:
-            n = 5
+        elif n >= 6 and n < 10:
+            n = 6
+        elif n >= 5 and n < 6:
+            n = 5            
         elif n >= 2.5 and n < 5:
             n = 2.5     
         elif n >= 1 and n < 2.5:
@@ -652,8 +654,14 @@ class Window(QtGui.QDialog):
         elif n >= 10 and n < 25:
             n = 10    
              
-        elif n >= 5 and n < 10:
-            n = 5
+        elif n >= 10 and n < 25:
+            n = 10    
+             
+        elif n >= 6 and n < 10:
+            n = 6
+        elif n >= 5 and n < 6:
+            n = 5 
+            
         elif n >= 2.5 and n < 5:
             n = 2.5     
         elif n >= 1 and n < 2.5:
@@ -861,8 +869,11 @@ class Window(QtGui.QDialog):
 #        f = None
         try:
             f_summer = open('summer.txt', 'rb')   # Read file with summer water column data 
-            for i in range(0,85):        
+            while True: 
+#                for i in range(0,85):        
                 line1 = f_summer.readline()
+                if len(line1) == 0:
+                    break                
                 values_summer.append(line1.split())
           
         except  IOError:
@@ -893,17 +904,19 @@ class Window(QtGui.QDialog):
         self.date_summer = data_summer[17][1:]
         self.sed_depth_summer = data_summer[18][1:]
         self.h2s_summer = data_summer[19][1:]
-        
+#        self.si_summer = data_summer[20][1:]        
         
         values_winter=[]   # create empty matrix for storing data
         f_winter = None
         try:
             f_winter = open('winter.txt', 'rb')   
-            for i in range(0,61):        
+            while True:
+#            for i in range(0,61):        
                 line_winter = f_winter.readline()
+                if len(line_winter) == 0:
+                    break
                 values_winter.append(line_winter.split())
           
-                    
         except  IOError:
             print("Could not find a file.")
         except  KeyboardInterrupt:
@@ -934,7 +947,50 @@ class Window(QtGui.QDialog):
         self.h2s_winter = data_winter[19][1:]
         
 
+        values_mai=[]   # create empty matrix for storing data
+        f_mai = None
+        try:
+            f_mai = open('mai.txt', 'rb')   
+            while True:
+#            for i in range(0,61):        
+                line_mai = f_mai.readline()
+                if len(line_mai) == 0:
+                    break
+                values_mai.append(line_mai.split())
+          
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_mai:
+                f_mai.close()
+            print("(Cleaning up: Read and closed the file mai)")
         
+        data_mai = zip(*values_mai)
+        
+        
+        #print values_mai
+   
+        self.depth_mai = data_mai[0][1:]
+        self.pH_mai = data_mai[1][1:]
+        self.sal_mai = data_mai[2][1:]
+        self.na_mai = data_mai[3][1:]
+        self.so4_mai = data_mai[8][1:]
+        self.no3_mai = data_mai[9][1:]
+        self.no2_mai = data_mai[10][1:]
+        self.nh4_mai = data_mai[11][1:]
+        self.si_mai = data_mai[12][1:]
+        self.po4_mai = data_mai[14][1:] 
+        self.mn_mai = data_mai[15][1:]
+        self.fe_mai = data_mai[16][1:]
+        self.co2_mai = data_mai[17][1:]
+        self.sed_depth_mai = data_mai[18][1:]     
+        self.h2s_mai = data_mai[19][1:]
+
+
+          
+                
         values_o2=[]   # create empty matrix for storing data
 #        fo2 = None
         try:
@@ -956,6 +1012,62 @@ class Window(QtGui.QDialog):
         self.depth_o2 = data_o2[0][1:]
         self.sed_depth_o2 = data_o2[1][1:]
         self.o2_o2 = data_o2[2][1:]
+        
+
+        values_o2_winter=[]   # create empty matrix for storing data
+#        fo2_winter = None
+        try:
+            f_o2_winter = open('o2_winter.txt', 'rb')   
+            while True:
+                line_o2_winter = f_o2_winter.readline()
+                if len(line_o2_winter) == 0:
+                    break
+                values_o2_winter.append(line_o2_winter.split())        
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_o2_winter:
+                f_o2_winter.close()
+            print("(Cleaning up: Read and closed the file o2_winter)")
+        data_o2_winter = zip(*values_o2_winter)
+        self.depth_o2_winter = data_o2_winter[0][1:]
+        self.sed_depth_o2_winter = data_o2_winter[1][1:]
+        self.o2_winter = data_o2_winter[2][1:]
+
+
+        values_o2_mai=[]   # create empty matrix for storing data
+#        fo2_mai = None
+        try:
+            f_o2_mai = open('o2_mai.txt', 'rb')   
+            while True:
+                line_o2_mai = f_o2_mai.readline()
+                if len(line_o2_mai) == 0:
+                    break
+                values_o2_mai.append(line_o2_mai.split())        
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_o2_mai:
+                f_o2_mai.close()
+            print("(Cleaning up: Read and closed the file o2_mai)")
+        data_o2_mai = zip(*values_o2_mai)
+        self.depth_o2_mai = data_o2_mai[0][1:]
+        self.sed_depth_o2_mai = data_o2_mai[1][1:]
+        self.o2_mai = data_o2_mai[2][1:]
+        
+        self.depth_o2_mai2 = data_o2_mai[3][1:]
+        self.sed_depth_o2_mai2 = data_o2_mai[4][1:]
+        self.o2_mai2 = data_o2_mai[5][1:]        
+        
+        
+        self.depth_o2_mai3 = data_o2_mai[6][1:]
+        self.sed_depth_o2_mai3 = data_o2_mai[7][1:]
+        self.o2_mai3 = data_o2_mai[8][1:]         
+        
         
         
         values_pH=[]   # create empty matrix for storing data
@@ -1003,6 +1115,61 @@ class Window(QtGui.QDialog):
         self.depth_pH_winter = data_pH_winter[0][1:]
         self.sed_depth_pH_winter = data_pH_winter[1][1:]
         self.pH_pH_winter = data_pH_winter[2][1:]
+
+
+
+
+
+#        values_mnfe=[]   # create empty matrix for storing data
+#        f_mnfe = None
+#       try:
+#            f_mnfe = open('mnfe_summer.txt', 'rb')   
+#            while True:
+#            for i in range(0,61):        
+#                line_mnfe = f_mnfe.readline()
+#                if len(line_mnfe) == 0:
+#                    break
+#                values_mnfe.append(line_mnfe.split())
+#          
+#        except  IOError:
+#            print("Could not find a file.")
+#        except  KeyboardInterrupt:
+#            print("!! You cancelled the reading from the file.")
+#        finally:
+#            if  f_mnfe:
+#                f_mnfe.close()
+#            print("(Cleaning up: Read and closed the file mnfe)")
+        
+#        data_mnfe_summer = zip(*values_mnfe)
+        
+        
+        #print values_mnfe
+   
+#        self.depth_mnfe_summer = data_mnfe_summer[0][1:]
+#        self.mn_mnfe_summer = data_mnfe_summer[1][1:]
+#        self.fe_mnfe_summer = data_mnfe_summer[2][1:]
+#        self.sed_depth_mnfe_summer = data_mnfe_summer[3][1:]#
+
+#        self.depth_mnfe_summer = data_mnfe_summer[4][1:]
+#        self.mn_mnfe_summer = data_mnfe_summer[5][1:]
+#        self.fe_mnfe_summer = data_mnfe_summer[6][1:]
+#        self.sed_depth_mnfe_summer = data_mnfe_summer[7][1:]
+        
+#        self.depth_mnfe_summer = data_mnfe_summer[8][1:]
+#        self.mn_mnfe_summer = data_mnfe_summer[9][1:]
+#        self.fe_mnfe_summer = data_mnfe_summer[10][1:]
+#        self.sed_depth_mnfe_summer = data_mnfe_summer[11][1:]        
+#        
+#        self.depth_mnfe_summer = data_mnfe_summer[12][1:]
+#        self.mn_mnfe_summer = data_mnfe_summer[13][1:]
+#        self.fe_mnfe_summer = data_mnfe_summer[14][1:]
+#        self.sed_depth_mnfe_summer = data_mnfe_summer[15][1:]     
+
+
+
+
+
+
         
         #############
         values_mnfe_summer=[]   # create empty matrix for storing data
@@ -1023,17 +1190,31 @@ class Window(QtGui.QDialog):
             print("(Cleaning up: Read and closed the file Summer)")
         
         data_mnfe_summer = zip(*values_mnfe_summer)
-        self.depth1_mnfe_summer = data_mnfe_summer[0][1:]
-        self.mn1_summer = data_mnfe_summer[1][1:]
-        self.fe1_summer = data_mnfe_summer[2][1:]
-        self.depth2_mnfe_summer = data_mnfe_summer[3][1:]
-        self.mn2_summer = data_mnfe_summer[4][1:]
-        self.fe2_summer = data_mnfe_summer[5][1:]
-        self.depth3_mnfe_summer = data_mnfe_summer[6][1:]
-        self.mn3_summer = data_mnfe_summer[7][1:]
-        self.fe3_summer = data_mnfe_summer[8][1:]
         
+        self.depth_mnfe_summer = data_mnfe_summer[0][1:]
+        self.mn_mnfe_summer = data_mnfe_summer[1][1:]
+        self.fe_mnfe_summer = data_mnfe_summer[2][1:]
+        self.sed_depth_mnfe_summer = data_mnfe_summer[3][1:]
+
+        self.depth1_mnfe_summer = data_mnfe_summer[4][1:]
+        self.mn1_mnfe_summer = data_mnfe_summer[5][1:]
+        self.fe1_mnfe_summer = data_mnfe_summer[6][1:]
+        self.sed_depth1_mnfe_summer = data_mnfe_summer[7][1:]
         
+        self.depth2_mnfe_summer = data_mnfe_summer[8][1:]
+        self.mn2_mnfe_summer = data_mnfe_summer[9][1:]
+        self.fe2_mnfe_summer = data_mnfe_summer[10][1:]
+        self.sed_depth2_mnfe_summer = data_mnfe_summer[11][1:]        
+        
+        self.depth3_mnfe_summer = data_mnfe_summer[12][1:]
+        self.mn3_mnfe_summer = data_mnfe_summer[13][1:]
+        self.fe3_mnfe_summer = data_mnfe_summer[14][1:]
+        self.sed_depth3_mnfe_summer = data_mnfe_summer[15][1:] 
+        
+        self.depth4_mnfe_summer = data_mnfe_summer[16][1:]
+        self.mn4_mnfe_summer = data_mnfe_summer[17][1:]
+        self.fe4_mnfe_summer = data_mnfe_summer[18][1:]
+        self.sed_depth4_mnfe_summer = data_mnfe_summer[19][1:]         
         values_mnfe_winter=[]   # create empty matrix for storing data
         #f1 = None
         try:
@@ -1053,24 +1234,24 @@ class Window(QtGui.QDialog):
         
         data_mnfe_winter = zip(*values_mnfe_winter)
         
-        self.mn1_winter = data_mnfe_winter[0][1:]
-        self.fe1_winter = data_mnfe_winter[1][1:]
-        self.depth1_mnfe_winter = data_mnfe_winter[2][1:]
-        self.mn2_winter = data_mnfe_winter[3][1:]
-        self.fe2_winter = data_mnfe_winter[4][1:]
-        self.depth2_mnfe_winter = data_mnfe_winter[5][1:]
-        self.mn3_winter = data_mnfe_winter[6][1:]
-        self.fe3_winter = data_mnfe_winter[7][1:]
-        self.depth3_mnfe_winter = data_mnfe_winter[8][1:]
-        self.mn4_winter = data_mnfe_winter[9][1:]
-        self.fe4_winter = data_mnfe_winter[10][1:]
-        self.depth4_mnfe_winter = data_mnfe_winter[11][1:]
-        self.mn5_winter = data_mnfe_winter[12][1:]
-        self.fe5_winter = data_mnfe_winter[13][1:]
-        self.depth5_mnfe_winter = data_mnfe_winter[14][1:]
-        self.mn6_winter = data_mnfe_winter[15][1:]
-        self.fe6_winter = data_mnfe_winter[16][1:]
-        self.depth6_mnfe_winter = data_mnfe_winter[17][1:] 
+        self.mn1_mnfe_winter = data_mnfe_winter[0][1:]
+        self.fe1_mnfe_winter = data_mnfe_winter[1][1:]
+        self.sed_depth1_mnfe_winter = data_mnfe_winter[2][1:]
+        self.mn2_mnfe_winter = data_mnfe_winter[3][1:]
+        self.fe2_mnfe_winter = data_mnfe_winter[4][1:]
+        self.sed_depth2_mnfe_winter = data_mnfe_winter[5][1:]
+        self.mn3_mnfe_winter = data_mnfe_winter[6][1:]
+        self.fe3_mnfe_winter = data_mnfe_winter[7][1:]
+        self.sed_depth3_mnfe_winter = data_mnfe_winter[8][1:]
+        self.mn4_mnfe_winter = data_mnfe_winter[9][1:]
+        self.fe4_mnfe_winter = data_mnfe_winter[10][1:]
+        self.sed_depth4_mnfe_winter = data_mnfe_winter[11][1:]
+        self.mn5_mnfe_winter = data_mnfe_winter[12][1:]
+        self.fe5_mnfe_winter = data_mnfe_winter[13][1:]
+        self.sed_depth5_mnfe_winter = data_mnfe_winter[14][1:]
+        self.mn6_mnfe_winter = data_mnfe_winter[15][1:]
+        self.fe6_mnfe_winter = data_mnfe_winter[16][1:]
+        self.sed_depth6_mnfe_winter = data_mnfe_winter[17][1:] 
         
         
                                                                                              
@@ -1284,8 +1465,7 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10) 
         self.ax11.scatter(self.so4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
-        self.ax21.scatter(self.h2s_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                   
+                
         self.ax02.scatter(self.po4_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)         
         self.ax12.scatter(self.so4_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
@@ -1305,6 +1485,26 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10)       
         self.ax12.scatter(self.so4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)         
+
+
+
+       
+        self.ax00.scatter(self.po4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax10.scatter(self.so4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+                    
+        self.ax01.scatter(self.po4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)       
+        self.ax11.scatter(self.so4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+
+        self.ax02.scatter(self.po4_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)       
+        self.ax12.scatter(self.so4_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+
+
          
         self.ax20.scatter(self.o2_o2,self.depth_o2,color='r' , alpha=1,edgecolor='#262626',
                      s = 5,linewidth=0.1,zorder=10) 
@@ -1312,7 +1512,37 @@ class Window(QtGui.QDialog):
                      s = 5,linewidth=0.1,zorder=10) 
         self.ax22.scatter(self.o2_o2,self.sed_depth_o2,color='r' ,alpha=1,edgecolor='#262626',
                      s = 5 ,linewidth=0.1,zorder=10)         
-        
+
+        self.ax20.scatter(self.o2_winter,self.depth_o2_winter,color='b' , alpha=0.5,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        self.ax21.scatter(self.o2_winter,self.depth_o2_winter,color='b' , alpha=0.5,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        self.ax22.scatter(self.o2_winter,self.sed_depth_o2_winter,color='b' ,alpha=0.5,edgecolor='#262626',
+                     s = 5 ,linewidth=0.1,zorder=10)         
+
+        self.ax20.scatter(self.o2_mai,self.depth_o2_mai,color='y' , alpha=0.5,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        self.ax21.scatter(self.o2_mai,self.depth_o2_mai,color='y' , alpha=0.5,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        self.ax22.scatter(self.o2_mai,self.sed_depth_o2_mai,color='y' ,alpha=0.5,edgecolor='#262626',
+                     s = 5 ,linewidth=0.1,zorder=10) 
+
+        self.ax20.scatter(self.o2_mai2,self.depth_o2_mai2,color='y' , alpha=0.5,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        self.ax21.scatter(self.o2_mai2,self.depth_o2_mai2,color='y' , alpha=0.5,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10) 
+        self.ax22.scatter(self.o2_mai2,self.sed_depth_o2_mai2,color='y' ,alpha=0.5,edgecolor='#262626',
+                     s = 5 ,linewidth=0.1,zorder=10) 
+
+#        self.ax20.scatter(self.o2_mai3,self.depth_o2_mai3,color='y' , alpha=0.5,edgecolor='#262626',
+#                     s = 5,linewidth=0.1,zorder=10) 
+#        self.ax21.scatter(self.o2_mai3,self.depth_o2_mai3,color='y' , alpha=0.5,edgecolor='#262626',
+#                     s = 5,linewidth=0.1,zorder=10) 
+#        self.ax22.scatter(self.o2_mai3,self.sed_depth_o2_mai3,color='y' ,alpha=0.5,edgecolor='#262626',
+#                     s = 5 ,linewidth=0.1,zorder=10) 
+
+
+
                                   
         self.canvas.draw()
         
@@ -1650,44 +1880,66 @@ class Window(QtGui.QDialog):
         self.ax00.scatter(self.no2_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
         self.ax00.scatter(self.no2_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)        
+                     s = self.markersize,linewidth=0.5,zorder=10)   
+        self.ax00.scatter(self.no2_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+                     
         self.ax01.scatter(self.no2_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         self.ax01.scatter(self.no2_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                                             
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        self.ax01.scatter(self.no2_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+                                                    
         self.ax02.scatter(self.no2_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)     
         self.ax02.scatter(self.no2_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-                   
+        self.ax02.scatter(self.no2_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        
+                           
         self.ax10.scatter(self.no3_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
         self.ax10.scatter(self.no3_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax10.scatter(self.no3_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)            
+        
         self.ax11.scatter(self.no3_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         self.ax11.scatter(self.no3_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
-                  
+        self.ax11.scatter(self.no3_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+                          
         self.ax12.scatter(self.no3_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)      
         self.ax12.scatter(self.no3_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
-                                 
+        self.ax12.scatter(self.no3_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        
+                                         
         self.ax20.scatter(self.nh4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         self.ax20.scatter(self.nh4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)        
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        self.ax20.scatter(self.nh4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                
         self.ax21.scatter(self.nh4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         self.ax21.scatter(self.nh4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)  
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        self.ax21.scatter(self.nh4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)          
                
         self.ax22.scatter(self.nh4_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         self.ax22.scatter(self.nh4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)     
-        
+        self.ax22.scatter(self.nh4_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)           
         
         self.canvas.draw()    
     def plot4(self): #function to define 1 figure Si,pH
@@ -1844,31 +2096,60 @@ class Window(QtGui.QDialog):
     def plot4_field(self):   # Si,pH
         self.ax00.scatter(self.si_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)        
-        self.ax01.scatter(self.si_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
+        self.ax01.scatter(self.si_summer,self.depth_summer,color='r' , alpha=0.5,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-        self.ax02.scatter(self.si_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                
+        self.ax02.scatter(self.si_summer,self.sed_depth_summer,color='r' , alpha=0.5,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)     
+
+        self.ax00.scatter(self.si_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax01.scatter(self.si_mai,self.depth_mai,color='y' , alpha=0.5,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax02.scatter(self.si_mai,self.sed_depth_mai,color='y' , alpha=0.5,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        
+        self.ax00.scatter(self.si_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)        
+        self.ax01.scatter(self.si_winter,self.depth_winter,color='b' , alpha=0.5,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)          
+        self.ax02.scatter(self.si_winter,self.sed_depth_winter,color='b' , alpha=0.5,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)          
+        
+           
         self.ax10.scatter(self.pH_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = 15,linewidth=0.5,zorder=10)
+        self.ax11.scatter(self.pH_summer,self.depth_summer,color='r' , alpha=0.5,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)            
+        self.ax12.scatter(self.pH_summer,self.sed_depth_summer,color='r' , alpha = 0.5,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10) 
+        
+        self.ax10.scatter(self.pH_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.5,zorder=10)
+        self.ax11.scatter(self.pH_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)            
+        self.ax12.scatter(self.pH_mai,self.sed_depth_mai,color='y' , alpha = 1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)                 
+        
         self.ax10.scatter(self.pH_pH,self.depth_pH,color='r' , alpha=1,edgecolor='#262626',
                      s = 15,linewidth=0.5,zorder=10)   
+        self.ax11.scatter(self.pH_pH,self.depth_pH,color='r' , alpha=0.5,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10) 
+        self.ax12.scatter(self.pH_pH,self.sed_depth_pH,color='r' , alpha = 1,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10) 
+        
+                        
         self.ax10.scatter(self.pH_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = 15,linewidth=0.5,zorder=10)            
-        self.ax11.scatter(self.pH_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = 15,linewidth=0.1,zorder=10)    
+                     s = 15,linewidth=0.5,zorder=10)                    
         self.ax11.scatter(self.pH_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = 15,linewidth=0.1,zorder=10)            
-        self.ax11.scatter(self.pH_pH,self.depth_pH,color='r' , alpha=1,edgecolor='#262626',
-                     s = 15,linewidth=0.1,zorder=10) 
-        self.ax11.scatter(self.pH_pH_winter,self.depth_pH_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = 5,linewidth=0.1,zorder=10)                          
-        self.ax12.scatter(self.pH_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = 15,linewidth=0.1,zorder=10) 
-        self.ax12.scatter(self.pH_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = 15,linewidth=0.1,zorder=10)           
-        self.ax12.scatter(self.pH_pH,self.sed_depth_pH,color='r' , alpha=1,edgecolor='#262626',
-                     s = 15,linewidth=0.1,zorder=10) 
-        self.ax12.scatter(self.pH_pH_winter,self.sed_depth_pH_winter,color='b' , alpha=1,edgecolor='#262626',
+        self.ax12.scatter(self.pH_winter,self.sed_depth_winter,color='b' , alpha = 0.5,edgecolor='#262626',
+                     s = 15,linewidth=0.1,zorder=10)         
+
+        self.ax10.scatter(self.pH_pH_winter,self.depth_pH_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = 5,linewidth=0.1,zorder=10)  
+        self.ax11.scatter(self.pH_pH_winter,self.depth_pH_winter,color='b' , alpha=0.5,edgecolor='#262626',
+                     s = 5,linewidth=0.05,zorder=10)    
+        self.ax12.scatter(self.pH_pH_winter,self.sed_depth_pH_winter,color='b' , alpha = 0.5,edgecolor='#262626',
                      s = 5,linewidth=0.1,zorder=10) 
         
         self.canvas.draw()    
@@ -2042,7 +2323,31 @@ class Window(QtGui.QDialog):
         self.ax01.scatter(self.mn_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                               
         self.ax02.scatter(self.mn_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)    
+                     s = self.markersize,linewidth=0.5,zorder=10)   
+
+        self.ax00.plot(self.mn_mnfe_summer,self.depth_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax01.plot(self.mn_mnfe_summer,self.depth_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax02.plot(self.mn_mnfe_summer,self.sed_depth_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o',  
+        self.ax00.plot(self.mn1_mnfe_summer,self.depth1_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax01.plot(self.mn1_mnfe_summer,self.depth1_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax02.plot(self.mn1_mnfe_summer,self.sed_depth1_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o',  
+        self.ax00.plot(self.mn2_mnfe_summer,self.depth2_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax01.plot(self.mn2_mnfe_summer,self.depth2_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax02.plot(self.mn2_mnfe_summer,self.sed_depth2_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o', 
+        self.ax00.plot(self.mn3_mnfe_summer,self.depth3_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax01.plot(self.mn3_mnfe_summer,self.depth3_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax02.plot(self.mn3_mnfe_summer,self.sed_depth3_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o', 
+        self.ax00.plot(self.mn4_mnfe_summer,self.depth4_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax01.plot(self.mn4_mnfe_summer,self.depth4_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax02.plot(self.mn4_mnfe_summer,self.sed_depth4_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o', 
+        
+        self.ax00.scatter(self.mn_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax01.scatter(self.mn_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                               
+        self.ax02.scatter(self.mn_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)           
+         
         self.ax00.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
         self.ax01.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
@@ -2051,25 +2356,69 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10)         
                       
         self.ax10.scatter(self.fe_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)
-        self.ax10.scatter(self.fe_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)      
-          
+                     s = self.markersize,linewidth=0.5,zorder=10)                
         self.ax11.scatter(self.fe_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         self.ax12.scatter(self.fe_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
 
+ 
+        self.ax10.plot(self.fe1_mnfe_summer,self.depth1_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax11.plot(self.fe1_mnfe_summer,self.depth1_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax12.plot(self.fe1_mnfe_summer,self.sed_depth1_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o',
+        self.ax10.plot(self.fe2_mnfe_summer,self.depth2_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax11.plot(self.fe2_mnfe_summer,self.depth2_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax12.plot(self.fe2_mnfe_summer,self.sed_depth2_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o',        
+        self.ax10.plot(self.fe3_mnfe_summer,self.depth3_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax11.plot(self.fe3_mnfe_summer,self.depth3_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax12.plot(self.fe3_mnfe_summer,self.sed_depth3_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o',        
+        self.ax10.plot(self.fe4_mnfe_summer,self.depth4_mnfe_summer,color='r',linewidth=self.linewidth)   
+        self.ax11.plot(self.fe4_mnfe_summer,self.depth4_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
+        self.ax12.plot(self.fe4_mnfe_summer,self.sed_depth_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o',        
+        
+
+        self.ax02.plot(self.mn1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',
+        self.ax02.plot(self.mn2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
+        self.ax02.plot(self.mn3_mnfe_winter,self.sed_depth3_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
+        self.ax02.plot(self.mn4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o', 
+        self.ax02.plot(self.mn5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o', 
+                
+        self.ax12.plot(self.fe1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',
+        self.ax12.plot(self.fe2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
+        self.ax12.plot(self.fe3_mnfe_winter,self.sed_depth3_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
+        self.ax12.plot(self.fe4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o', 
+        self.ax12.plot(self.fe5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',  
+                       
+        self.ax10.scatter(self.fe_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                
+        self.ax11.scatter(self.fe_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)  
+        self.ax12.scatter(self.fe_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+        
+        self.ax10.scatter(self.fe_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
         self.ax11.scatter(self.fe_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         self.ax12.scatter(self.fe_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)        
+                     s = self.markersize,linewidth=0.5,zorder=10)   
+        
+           
         self.ax20.scatter(self.h2s_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                                     
         self.ax21.scatter(self.h2s_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)         
         self.ax22.scatter(self.h2s_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
+        
+        self.ax20.scatter(self.h2s_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                                     
+        self.ax21.scatter(self.h2s_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)         
+        self.ax22.scatter(self.h2s_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)          
+        
+        
         self.ax20.scatter(self.h2s_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)           
         self.ax21.scatter(self.h2s_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
