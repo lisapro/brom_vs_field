@@ -55,7 +55,7 @@ class Window(QtGui.QDialog):
     summer = '#d0576f' 
     linewidth = 0.5
     alpha = 0.5
-    markersize=25    
+    markersize= 13 #25    
 #positions for different axes, sharing one subplot
     axis1 = 0
     axis2 = 27
@@ -1519,6 +1519,15 @@ class Window(QtGui.QDialog):
                          
     def plot1_field(self): # function to plot PO4,SO4,O2 field data
 
+
+
+
+        self.ax00.plot(self.po4_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax01.plot(self.po4_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax02.plot(self.po4_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5)  
+        self.ax10.plot(self.so4_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax11.plot(self.so4_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax12.plot(self.so4_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5)               
 #        self.read_fielddata()
         
         self.ax00.scatter(self.po4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
@@ -1549,9 +1558,26 @@ class Window(QtGui.QDialog):
         self.ax02.scatter(self.po4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)       
         self.ax12.scatter(self.so4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)         
-
-
+                     s = self.markersize,linewidth=0.5,zorder=10)    
+             
+        self.ax00.scatter(self.po4_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
+        self.ax01.scatter(self.po4_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = 60,linewidth=0.5,zorder=10)                               
+        self.ax02.scatter(self.po4_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = 60,linewidth=0.5,zorder=10)     
+        self.ax10.scatter(self.so4_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
+        self.ax11.scatter(self.so4_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = 60,linewidth=0.5,zorder=10)                               
+        self.ax12.scatter(self.so4_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = 60,linewidth=0.5,zorder=10)  
+#        self.ax20.scatter(self.o2_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
+#        self.ax21.scatter(self.o2_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)                               
+#        self.ax22.scatter(self.o2_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)          
 
        
         self.ax00.scatter(self.po4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
@@ -1941,6 +1967,16 @@ class Window(QtGui.QDialog):
                                                     
         self.canvas.draw()   
     def plot3_field(self): #NO2,NO3,NH4  
+
+        self.ax00.plot(self.no2_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax01.plot(self.no2_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax02.plot(self.no2_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5)  
+        self.ax10.plot(self.no3_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax11.plot(self.no3_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax12.plot(self.no3_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5) 
+        self.ax20.plot(self.nh4_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax21.plot(self.nh4_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax22.plot(self.nh4_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5) 
         
         self.ax00.scatter(self.no2_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
@@ -2159,6 +2195,17 @@ class Window(QtGui.QDialog):
                       
         self.canvas.draw()
     def plot4_field(self):   # Si,pH
+        
+
+        self.ax00.plot(self.si_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax01.plot(self.si_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax02.plot(self.si_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5)  
+        self.ax10.plot(self.pH_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax11.plot(self.pH_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax12.plot(self.pH_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5) 
+
+
+        
         self.ax00.scatter(self.si_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)        
         self.ax01.scatter(self.si_summer,self.depth_summer,color='r' , alpha=0.5,edgecolor='#262626',
@@ -2382,7 +2429,34 @@ class Window(QtGui.QDialog):
         self.canvas.draw() 
     def plot5_field(self): #Mn,fe,h2s  
       
-      
+#        self.ax00.scatter(self.mn_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
+#        self.ax01.scatter(self.mn_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)                               
+#        self.ax02.scatter(self.mn_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10) 
+#        self.ax10.scatter(self.fe_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
+#        self.ax11.scatter(self.fe_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)                               
+#        self.ax12.scatter(self.fe_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)         
+#        self.ax20.scatter(self.h2s_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
+#        self.ax21.scatter(self.h2s_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)                               
+#        self.ax22.scatter(self.h2s_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)         
+        self.ax00.plot(self.mn_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax01.plot(self.mn_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax02.plot(self.mn_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5)  
+        self.ax10.plot(self.fe_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax11.plot(self.fe_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax12.plot(self.fe_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5)         
+        self.ax20.plot(self.h2s_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax21.plot(self.h2s_winter_average,self.depth_winter_average,'bo--',linewidth=0.5)
+        self.ax22.plot(self.h2s_winter_average,self.sed_depth_winter_average,'bo--',linewidth=0.5)   
+                      
         self.ax00.scatter(self.mn_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
         self.ax01.scatter(self.mn_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
@@ -2413,19 +2487,14 @@ class Window(QtGui.QDialog):
         self.ax02.scatter(self.mn_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)           
          
-        self.ax00.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)
-        self.ax01.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                               
+#        self.ax00.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+#                     s = self.markersize,linewidth=0.5,zorder=10)
+#        self.ax01.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
+#                     s = self.markersize,linewidth=0.5,zorder=10)                               
 #        self.ax02.scatter(self.mn_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
 #                     s = self.markersize,linewidth=0.5,zorder=10)         
 
-        self.ax00.scatter(self.mn_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)
-        self.ax01.scatter(self.mn_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)                               
-        self.ax02.scatter(self.mn_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10) 
+
 
                       
         self.ax10.scatter(self.fe_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
@@ -2450,18 +2519,18 @@ class Window(QtGui.QDialog):
         self.ax12.plot(self.fe4_mnfe_summer,self.sed_depth_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o',        
         
 
-        self.ax02.plot(self.mn1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',
-        self.ax02.plot(self.mn2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',        
-        self.ax02.plot(self.mn3_mnfe_winter,self.sed_depth3_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',        
-        self.ax02.plot(self.mn4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o', 
-        self.ax02.plot(self.mn5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o', 
+#        self.ax02.plot(self.mn1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',
+#        self.ax02.plot(self.mn2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',        
+#        self.ax02.plot(self.mn3_mnfe_winter,self.sed_depth3_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',        
+#        self.ax02.plot(self.mn4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o', 
+#        self.ax02.plot(self.mn5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o', 
                 
-        self.ax12.plot(self.fe1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',
-        self.ax12.plot(self.fe2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
-        self.ax12.plot(self.fe3_mnfe_winter,self.sed_depth3_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
-        self.ax12.plot(self.fe4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o', 
-        self.ax12.plot(self.fe5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',  
-                       
+#        self.ax12.plot(self.fe1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',
+#        self.ax12.plot(self.fe2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
+#        self.ax12.plot(self.fe3_mnfe_winter,self.sed_depth3_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
+#        self.ax12.plot(self.fe4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o', 
+#        self.ax12.plot(self.fe5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',  
+#                       
         self.ax10.scatter(self.fe_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                
         self.ax11.scatter(self.fe_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
@@ -2475,7 +2544,9 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10)  
         self.ax12.scatter(self.fe_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)   
-        
+
+
+       
            
         self.ax20.scatter(self.h2s_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                                     
@@ -2498,6 +2569,10 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10) 
         self.ax22.scatter(self.h2s_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
+        
+          
+        
+        
         self.canvas.draw()    
     def plot6(self): # function to define 1 figure
         plt.clf() #clear figure before updating 
