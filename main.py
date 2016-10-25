@@ -456,9 +456,11 @@ class Window(QtGui.QDialog):
         elif n > 7000 and n <= 10000:  
             n = 10000                     
         elif n > 5000 and n <= 7000:  
-            n =7000         
-        elif n > 1000 and n <= 5000:  
-            n = 5000        
+            n =7000 
+        elif n > 2000 and n <= 5000:  
+            n = 5000                                  
+        elif n > 1000 and n <= 2000:  
+            n = 2000        
         elif n > 500 and n <= 1000:  
             n = 1000 
         elif n > 350 and n <= 500:  
@@ -578,8 +580,10 @@ class Window(QtGui.QDialog):
             n = 10000                     
         elif n > 5000 and n <= 7000:  
             n =7000         
-        elif n > 1000 and n <= 5000:  
-            n = 5000        
+        elif n > 2000 and n <= 5000:  
+            n = 5000                                  
+        elif n > 1000 and n <= 2000:  
+            n = 2000          
         elif n > 500 and n <= 1000:  
             n = 1000 
         elif n > 350 and n <= 500:  
@@ -946,6 +950,67 @@ class Window(QtGui.QDialog):
         self.sed_depth_winter = data_winter[18][1:]
         self.h2s_winter = data_winter[19][1:]
         
+
+
+        values_winter_average=[]   # create empty matrix for storing data
+        f_winter_average = None
+        try:
+            f_winter_average = open('winter-average.txt', 'rb')   
+            while True:
+#            for i in range(0,61):        
+                line_winter_average = f_winter_average.readline()
+                if len(line_winter_average) == 0:
+                    break
+                values_winter_average.append(line_winter_average.split())
+          
+        except  IOError:
+            print("Could not find a file.")
+        except  KeyboardInterrupt:
+            print("!! You cancelled the reading from the file.")
+        finally:
+            if  f_winter_average:
+                f_winter_average.close()
+            print("(Cleaning up: Read and closed the file winter_average)")
+        
+        data_winter_average = zip(*values_winter_average)
+        
+        
+        #print values_winter_average
+        self.depth_winter_average = data_winter_average[2][1:]
+        self.pH_winter_average = data_winter_average[4][1:]
+        self.sal_winter_average = data_winter_average[5][1:]
+        self.na_winter_average = data_winter_average[6][1:]
+        self.so4_winter_average = data_winter_average[11][1:]
+        self.h2s_winter_average = data_winter_average[12][1:]        
+        self.no3_winter_average = data_winter_average[13][1:]
+        self.no2_winter_average = data_winter_average[14][1:]
+        self.nh4_winter_average = data_winter_average[15][1:]
+        self.si_winter_average = data_winter_average[16][1:]
+        self.po4_winter_average = data_winter_average[18][1:] 
+        self.mn_winter_average = data_winter_average[19][1:]
+        self.fe_winter_average = data_winter_average[20][1:]
+#        self.date_winter_average = data_winter_average[17][1:]
+        self.sed_depth_winter_average = data_winter_average[3][1:]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         values_mai=[]   # create empty matrix for storing data
         f_mai = None
@@ -2352,8 +2417,16 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10)
         self.ax01.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                               
-        self.ax02.scatter(self.mn_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
-                     s = self.markersize,linewidth=0.5,zorder=10)         
+#        self.ax02.scatter(self.mn_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
+#                     s = self.markersize,linewidth=0.5,zorder=10)         
+
+        self.ax00.scatter(self.mn_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)
+        self.ax01.scatter(self.mn_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10)                               
+        self.ax02.scatter(self.mn_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
+                     s = self.markersize,linewidth=0.5,zorder=10) 
+
                       
         self.ax10.scatter(self.fe_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                
@@ -2377,11 +2450,11 @@ class Window(QtGui.QDialog):
         self.ax12.plot(self.fe4_mnfe_summer,self.sed_depth_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o',        
         
 
-        self.ax02.plot(self.mn1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',
-        self.ax02.plot(self.mn2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
-        self.ax02.plot(self.mn3_mnfe_winter,self.sed_depth3_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
-        self.ax02.plot(self.mn4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o', 
-        self.ax02.plot(self.mn5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o', 
+        self.ax02.plot(self.mn1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',
+        self.ax02.plot(self.mn2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',        
+        self.ax02.plot(self.mn3_mnfe_winter,self.sed_depth3_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o',        
+        self.ax02.plot(self.mn4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o', 
+        self.ax02.plot(self.mn5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',marker='o',linewidth=self.linewidth) #marker='o', 
                 
         self.ax12.plot(self.fe1_mnfe_winter,self.sed_depth1_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',
         self.ax12.plot(self.fe2_mnfe_winter,self.sed_depth2_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',        
