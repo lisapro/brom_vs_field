@@ -1560,18 +1560,18 @@ class Window(QtGui.QDialog):
         self.ax12.scatter(self.so4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)    
              
-        self.ax00.scatter(self.po4_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
-        self.ax01.scatter(self.po4_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = 60,linewidth=0.5,zorder=10)                               
-        self.ax02.scatter(self.po4_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = 60,linewidth=0.5,zorder=10)     
-        self.ax10.scatter(self.so4_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
-        self.ax11.scatter(self.so4_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = 60,linewidth=0.5,zorder=10)                               
-        self.ax12.scatter(self.so4_winter_average,self.sed_depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
-                     s = 60,linewidth=0.5,zorder=10)  
+#        self.ax00.scatter(self.po4_winter_average,self.depth_winter_average,color='b' , alpha=1,edgecolor='#262626',
+#                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
+#        self.ax01.scatter(self.po4_winter_average,self.depth_winter_average,color='b' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)                               
+#        self.ax02.scatter(self.po4_winter_average,self.sed_depth_winter_average,color='b' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)     
+#        self.ax10.scatter(self.so4_winter_average,self.depth_winter_average,color='b' , alpha=1,edgecolor='#262626',
+#                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
+#        self.ax11.scatter(self.so4_winter_average,self.depth_winter_average,color='b' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)                               
+#        self.ax12.scatter(self.so4_winter_average,self.sed_depth_winter_average,color='b' , alpha=1,edgecolor='#262626',
+#                     s = 60,linewidth=0.5,zorder=10)  
 #        self.ax20.scatter(self.o2_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
 #                     s = 60 ,linewidth=0.5,zorder=10)#self.markersize
 #        self.ax21.scatter(self.o2_winter_average,self.depth_winter_average,color='g' , alpha=1,edgecolor='#262626',
@@ -1580,19 +1580,19 @@ class Window(QtGui.QDialog):
 #                     s = 60,linewidth=0.5,zorder=10)          
 
        
-        self.ax00.scatter(self.po4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax00.scatter(self.po4_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-        self.ax10.scatter(self.so4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax10.scatter(self.so4_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
                     
-        self.ax01.scatter(self.po4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax01.scatter(self.po4_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)       
-        self.ax11.scatter(self.so4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax11.scatter(self.so4_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)         
 
-        self.ax02.scatter(self.po4_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax02.scatter(self.po4_mai,self.sed_depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)       
-        self.ax12.scatter(self.so4_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax12.scatter(self.so4_mai,self.sed_depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
 
 
@@ -1611,25 +1611,25 @@ class Window(QtGui.QDialog):
         self.ax22.scatter(self.o2_winter,self.sed_depth_o2_winter,color='b' ,alpha=0.5,edgecolor='#262626',
                      s = 5 ,linewidth=0.1,zorder=10)         
 
-        self.ax20.scatter(self.o2_mai,self.depth_o2_mai,color='y' , alpha=0.5,edgecolor='#262626',
+        self.ax20.scatter(self.o2_mai,self.depth_o2_mai,color='g' , alpha=0.5,edgecolor='#262626',
                      s = 5,linewidth=0.1,zorder=10) 
-        self.ax21.scatter(self.o2_mai,self.depth_o2_mai,color='y' , alpha=0.5,edgecolor='#262626',
+        self.ax21.scatter(self.o2_mai,self.depth_o2_mai,color='g' , alpha=0.5,edgecolor='#262626',
                      s = 5,linewidth=0.1,zorder=10) 
-        self.ax22.scatter(self.o2_mai,self.sed_depth_o2_mai,color='y' ,alpha=0.5,edgecolor='#262626',
+        self.ax22.scatter(self.o2_mai,self.sed_depth_o2_mai,color='g' ,alpha=0.5,edgecolor='#262626',
                      s = 5 ,linewidth=0.1,zorder=10) 
 
-        self.ax20.scatter(self.o2_mai2,self.depth_o2_mai2,color='y' , alpha=0.5,edgecolor='#262626',
+        self.ax20.scatter(self.o2_mai2,self.depth_o2_mai2,color='g' , alpha=0.5,edgecolor='#262626',
                      s = 5,linewidth=0.1,zorder=10) 
-        self.ax21.scatter(self.o2_mai2,self.depth_o2_mai2,color='y' , alpha=0.5,edgecolor='#262626',
+        self.ax21.scatter(self.o2_mai2,self.depth_o2_mai2,color='g' , alpha=0.5,edgecolor='#262626',
                      s = 5,linewidth=0.1,zorder=10) 
-        self.ax22.scatter(self.o2_mai2,self.sed_depth_o2_mai2,color='y' ,alpha=0.5,edgecolor='#262626',
+        self.ax22.scatter(self.o2_mai2,self.sed_depth_o2_mai2,color='g' ,alpha=0.5,edgecolor='#262626',
                      s = 5 ,linewidth=0.1,zorder=10) 
 
-#        self.ax20.scatter(self.o2_mai3,self.depth_o2_mai3,color='y' , alpha=0.5,edgecolor='#262626',
+#        self.ax20.scatter(self.o2_mai3,self.depth_o2_mai3,color='g' , alpha=0.5,edgecolor='#262626',
 #                     s = 5,linewidth=0.1,zorder=10) 
-#        self.ax21.scatter(self.o2_mai3,self.depth_o2_mai3,color='y' , alpha=0.5,edgecolor='#262626',
+#        self.ax21.scatter(self.o2_mai3,self.depth_o2_mai3,color='g' , alpha=0.5,edgecolor='#262626',
 #                     s = 5,linewidth=0.1,zorder=10) 
-#        self.ax22.scatter(self.o2_mai3,self.sed_depth_o2_mai3,color='y' ,alpha=0.5,edgecolor='#262626',
+#        self.ax22.scatter(self.o2_mai3,self.sed_depth_o2_mai3,color='g' ,alpha=0.5,edgecolor='#262626',
 #                     s = 5 ,linewidth=0.1,zorder=10) 
 
 
@@ -1982,21 +1982,21 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10)
         self.ax00.scatter(self.no2_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)   
-        self.ax00.scatter(self.no2_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax00.scatter(self.no2_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)         
                      
         self.ax01.scatter(self.no2_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         self.ax01.scatter(self.no2_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
-        self.ax01.scatter(self.no2_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax01.scatter(self.no2_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)         
                                                     
         self.ax02.scatter(self.no2_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)     
         self.ax02.scatter(self.no2_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-        self.ax02.scatter(self.no2_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax02.scatter(self.no2_mai,self.sed_depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         
                            
@@ -2004,21 +2004,21 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10)
         self.ax10.scatter(self.no3_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)        
-        self.ax10.scatter(self.no3_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax10.scatter(self.no3_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)            
         
         self.ax11.scatter(self.no3_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         self.ax11.scatter(self.no3_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
-        self.ax11.scatter(self.no3_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax11.scatter(self.no3_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
                           
         self.ax12.scatter(self.no3_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)      
         self.ax12.scatter(self.no3_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
-        self.ax12.scatter(self.no3_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax12.scatter(self.no3_mai,self.sed_depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         
                                          
@@ -2026,20 +2026,20 @@ class Window(QtGui.QDialog):
                      s = self.markersize,linewidth=0.5,zorder=10) 
         self.ax20.scatter(self.nh4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
-        self.ax20.scatter(self.nh4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax20.scatter(self.nh4_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                
         self.ax21.scatter(self.nh4_summer,self.depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         self.ax21.scatter(self.nh4_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
-        self.ax21.scatter(self.nh4_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax21.scatter(self.nh4_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)          
                
         self.ax22.scatter(self.nh4_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         self.ax22.scatter(self.nh4_winter,self.sed_depth_winter,color='b' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)     
-        self.ax22.scatter(self.nh4_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax22.scatter(self.nh4_mai,self.sed_depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)           
         
         self.canvas.draw()    
@@ -2213,11 +2213,11 @@ class Window(QtGui.QDialog):
         self.ax02.scatter(self.si_summer,self.sed_depth_summer,color='r' , alpha=0.5,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)     
 
-        self.ax00.scatter(self.si_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax00.scatter(self.si_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)        
-        self.ax01.scatter(self.si_mai,self.depth_mai,color='y' , alpha=0.5,edgecolor='#262626',
+        self.ax01.scatter(self.si_mai,self.depth_mai,color='g' , alpha=0.5,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-        self.ax02.scatter(self.si_mai,self.sed_depth_mai,color='y' , alpha=0.5,edgecolor='#262626',
+        self.ax02.scatter(self.si_mai,self.sed_depth_mai,color='g' , alpha=0.5,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         
         self.ax00.scatter(self.si_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
@@ -2235,11 +2235,11 @@ class Window(QtGui.QDialog):
         self.ax12.scatter(self.pH_summer,self.sed_depth_summer,color='r' , alpha = 0.5,edgecolor='#262626',
                      s = 15,linewidth=0.1,zorder=10) 
         
-        self.ax10.scatter(self.pH_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax10.scatter(self.pH_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = 15,linewidth=0.5,zorder=10)
-        self.ax11.scatter(self.pH_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax11.scatter(self.pH_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = 15,linewidth=0.1,zorder=10)            
-        self.ax12.scatter(self.pH_mai,self.sed_depth_mai,color='y' , alpha = 1,edgecolor='#262626',
+        self.ax12.scatter(self.pH_mai,self.sed_depth_mai,color='g' , alpha = 1,edgecolor='#262626',
                      s = 15,linewidth=0.1,zorder=10)                 
         
         self.ax10.scatter(self.pH_pH,self.depth_pH,color='r' , alpha=1,edgecolor='#262626',
@@ -2480,11 +2480,11 @@ class Window(QtGui.QDialog):
         self.ax01.plot(self.mn4_mnfe_summer,self.depth4_mnfe_summer,color='r',linewidth=self.linewidth)   #marker='o',
         self.ax02.plot(self.mn4_mnfe_summer,self.sed_depth4_mnfe_summer,color='r',linewidth=self.linewidth) #marker='o', 
         
-        self.ax00.scatter(self.mn_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax00.scatter(self.mn_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)
-        self.ax01.scatter(self.mn_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax01.scatter(self.mn_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                               
-        self.ax02.scatter(self.mn_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax02.scatter(self.mn_mai,self.sed_depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)           
          
 #        self.ax00.scatter(self.mn_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
@@ -2531,11 +2531,11 @@ class Window(QtGui.QDialog):
 #        self.ax12.plot(self.fe4_mnfe_winter,self.sed_depth4_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o', 
 #        self.ax12.plot(self.fe5_mnfe_winter,self.sed_depth5_mnfe_winter,color='b',linewidth=self.linewidth) #marker='o',  
 #                       
-        self.ax10.scatter(self.fe_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax10.scatter(self.fe_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                
-        self.ax11.scatter(self.fe_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax11.scatter(self.fe_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
-        self.ax12.scatter(self.fe_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax12.scatter(self.fe_mai,self.sed_depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10) 
         
         self.ax10.scatter(self.fe_winter,self.depth_winter,color='b' , alpha=1,edgecolor='#262626',
@@ -2555,11 +2555,11 @@ class Window(QtGui.QDialog):
         self.ax22.scatter(self.h2s_summer,self.sed_depth_summer,color='r' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)  
         
-        self.ax20.scatter(self.h2s_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax20.scatter(self.h2s_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)                                     
-        self.ax21.scatter(self.h2s_mai,self.depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax21.scatter(self.h2s_mai,self.depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)         
-        self.ax22.scatter(self.h2s_mai,self.sed_depth_mai,color='y' , alpha=1,edgecolor='#262626',
+        self.ax22.scatter(self.h2s_mai,self.sed_depth_mai,color='g' , alpha=1,edgecolor='#262626',
                      s = self.markersize,linewidth=0.5,zorder=10)          
         
         
