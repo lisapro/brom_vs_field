@@ -1,8 +1,7 @@
 # brom_vs_field
 
 ## About
-brom_vs_field - is a script written on python 2.7 to visualise results of running Bottom RedOx Model - coupled benthic-pelagic model for simulation of seasonal anoxia and its impact (http://www.geosci-model-dev-discuss.net/gmd-2015-239/gmd-2015-239.pdf) and to compare it with the field data. 
-Now it is implemented to Berre lagoon 
+brom_vs_field - is a script written on python 3 (before BERRE2 commit are the versions for python 2.7, not supported anymore) to visualise results of running Bottom RedOx Model - coupled benthic-pelagic model for simulation of seasonal anoxia and its impact (http://www.geosci-model-dev-discuss.net/gmd-2015-239/gmd-2015-239.pdf) and to compare it with the field data. Now it is implemented to Berre lagoon 
 
 ## How to use
 1. BROM Pictures uses two third-party Python modules,  NumPy and MatPlotLib . These need to be installed to run script.
