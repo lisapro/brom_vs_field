@@ -45,7 +45,7 @@ class Window(QtWidgets.QDialog):
                 
         # open file system to choose needed nc file 
         self.fname ,_  = (QtWidgets.QFileDialog.getOpenFileName(self,
-        'Open netcdf ', os.getcwd(), "netcdf (*.nc);; all (*)"))  #str
+        'Open netcdf ', os.getcwd(), "netcdf (*.nc);; all (*)"))
           
         self.totitle = os.path.split(self.fname)[1]
         self.setWindowTitle("BROM Pictures ("+str(self.totitle)+')')     
@@ -67,17 +67,12 @@ class Window(QtWidgets.QDialog):
         self.all_year_box = QtWidgets.QComboBox()                                                                       
         self.all_year_button =  QtWidgets.QPushButton()                                  
         self.fick_box = QtWidgets.QPushButton() 
-        self.help_button = QtWidgets.QPushButton(' ')
+        self.help_button = QtWidgets.QPushButton('Help')
                 
-        ## add only 2d arrays to variables list       
-        ## We skip z and time since they are 1d array, 
-        ## we need to know the shape of other arrays
-        ## If the file includes other 1d var, it 
-        ## could raise an err, such var should be skipped also
-        
         self.fh =  Dataset(self.fname)                    
         readdata.read_num_col(self,self.fname)
-
+        self.qlistwidget.addItems(self.sorted_names)
+        
         # Add group Boxes - boxes of widgets
         createOptionsGroup(self)
         createTimeGroup(self)
@@ -86,10 +81,6 @@ class Window(QtWidgets.QDialog):
         if 'i' in self.names_vars: 
             self.dist = np.array(self.fh.variables['i'])  
                     
-        # sort variables alphabetically non-case sensitive        
-        self.sorted_names =  sorted(self.names_vars, key = lambda s: s.lower())  
-        self.qlistwidget.addItems(self.sorted_names)
-        
         self.fh.close()
 
         if 'i' in self.names_vars:                        
@@ -104,7 +95,6 @@ class Window(QtWidgets.QDialog):
         ### Define connection between clicking the button and 
         ### calling the function to plot figures         
                                  
-        #self.time_prof_last_year.released.connect(self.call_print_lyr)
         self.all_year_button.released.connect(self.call_all_year)      
         self.fick_box.released.connect(self.call_fluxes)                                   
         self.help_button.released.connect(self.call_help)

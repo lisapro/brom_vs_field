@@ -84,9 +84,9 @@ def plot(self):
                  color='#b08b52',alpha = 0.4,
                  label = "sediment"  )
     
-    if  self.change_limits_checkbox.isChecked():
-        readdata.change_maxmin(self)
-    
+    #if  self.change_limits_checkbox.isChecked():
+    readdata.set_maxmin(self,z)
+
     for n in range(start,stop,10):#365 
         self.ax00.plot(z[n][0:self.ny2max],
               self.depth[0:self.ny2max],
