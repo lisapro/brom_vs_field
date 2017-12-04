@@ -106,8 +106,8 @@ def readdata2_brom(self,fname):
                  
     #print (min(self.dates),max(self.dates))
     #time = dates 
-    if 'i' in self.names_vars: 
-        self.dist = np.array(self.fh.variables['i']) 
+    #if 'i' in self.names_vars: 
+    #    self.dist = np.array(self.fh.variables['i']) 
 
  
 def read_all_year_var(self,fname,varname1,varname2,varname3): 
@@ -267,7 +267,7 @@ def depth_sed(self):
         depth_sed2.append(v)
         self.depth_sed2 = depth_sed2  
         #print ('in depth_sed2')         
-         
+'''         
 def varmax(self,variable,vartype,start,stop): 
     if vartype == 'watdist': #water
         n = variable[start:stop,0:self.ny1max].max() 
@@ -284,7 +284,7 @@ def varmax(self,variable,vartype,start,stop):
                                                                                          
     self.watmax =  n   
     return self.watmax
-
+'''
 # make "beautiful"  values to show on ticks  
 def int_value(self,n,minv,maxv):
     num = self.num
@@ -309,45 +309,7 @@ def int_value(self,n,minv,maxv):
           
     return m    
 
-def varmin(self,variable,vartype,start,stop):
-    
-    if vartype == 'watdist': #dist plot water
-        n = np.floor(variable[start:stop,0:self.ny1max].min())
-        
-    elif vartype == 'seddist' :  #dist plot sediment
-        n = np.floor(variable[start:stop,self.nysedmin:].min())
-        
-    elif vartype == 'wattime' : #time plot water
-        # We do not need to read start:stop
-        n = np.floor(variable[0:self.ny1max,:].min())  
-        #print ("min",n )      
-    elif vartype == 'sedtime'  : #time plot sediment
-        n = np.floor(variable[self.nysedmin-2:,:].min()) 
-                
-    # make "beautiful"  values to show on ticks
-    ##print ('varmin', n)            
-    if n > 10000. and n <= 100000.:  
-        n = int(np.floor(n/ 1000.0)) * 1000 - 1000.
-    elif n > 1000. and n <= 10000.:  
-        n = int(np.floor(n / 100.0)) * 100  #- 20.                                 
-    elif n >= 100. and n < 1000.:
-        n = int(np.floor(float(n) / 10.0)) * 10 - 1.
-    elif n >= 1. and n < 100. :
-        n =  int(np.floor(float(n)))  - 1.  
-    elif n >= 0.1 and n < 1. :
-        n =  (np.floor(n*10.))/10. - 0.1  
-    elif n >= 0.01 and n < 0.1 :
-        n =  (np.floor(n*100.))/100. 
-    elif n >= 0.001 and n < 0.01 :
-        n =  (np.floor(n*1000.))/1000.
-    elif n >= 0.0001 and n < 0.001 :
-        n =  (np.floor(n*10000))/10000 -  0.0001   
-    elif n >= 0.00001 and n < 0.0001 :
-        n =  (np.floor(n*100000))/100000 
-  
-    self.watmin =  n  
-                 
-    return self.watmin
+
 
 # make "beautiful"  values to show on ticks 
 def ticks(minv,maxv):    
@@ -401,26 +363,9 @@ def ticks(minv,maxv):
         #+ (maxv - minv)/2.                  
 
     return ticks
-    #print (ticks)
-#function to define y limits 
-# 
-'''
-def y_lim(self,axis): 
-    if axis in (self.ax00,self.ax10,self.ax20):   #water          
-        axis.fill_between(self.xticks, self.y1max, self.y1min,
-                          facecolor= self.wat_col, alpha=self.a_w)  
-    elif axis in (self.ax01,self.ax11,self.ax21):  #BBL
-        axis.fill_between(self.xticks, self.y2max, self.y2min_fill_bbl,
-                           facecolor= self.bbl_col, alpha=self.a_bbl)
-        #plt.setp(axis.get_xticklabels(), visible=False)                                           
-    elif axis in (self.ax02,self.ax12,self.ax22): #sediment 
-        axis.fill_between(self.xticks, self.ysedmax_fill_bbl,
-                           self.ysedmin, facecolor= self.bbl_col, alpha=self.a_bbl)  
-        axis.fill_between(self.xticks, self.ysedmax, self.ysedmin_fill_sed,
-                           facecolor= self.sed_col, alpha=self.a_sed)    
-'''
 
 #function to define y limits  
+'''
 def y_lim1(self,axis): 
     self.xticks =(np.arange(0,100000))
     if axis in (self.ax00,self.ax10,self.ax20,
@@ -461,8 +406,9 @@ def y_lim1(self,axis):
         axis.yaxis.set_minor_locator(minorLocator)
         axis.yaxis.grid(True,'minor')
         axis.yaxis.grid(True,'major')
-        axis.xaxis.grid(True,'major')      
-                
+        axis.xaxis.grid(True,'major') 
+'''             
+'''                
 def setmaxmin(self,axis,var,type):
     minv = varmin(self,var,type) #0 - water 
     maxv = varmax(self,var,type)
@@ -470,12 +416,36 @@ def setmaxmin(self,axis,var,type):
     #tick = ticks(watmin,watmax)
     axis.set_xticks(np.arange(minv,maxv+((maxv - minv)/2.),
             ((maxv - minv)/2.)))      
-        
+'''
+
+def change_maxmin(self):
+    if  self.change_limits_checkbox.isChecked():
+
+        watmin = self.box_minwater.value() 
+        watmax = self.box_maxwater.value()         
+        if watmin == watmax : 
+            watmax += 0.01
+            
+        bblmin = self.box_minbbl.value() 
+        bblmax = self.box_maxbbl.value()
+        if bblmin == bblmax : 
+            bblmax += 0.01
+                            
+        sedmin = self.box_minsed.value() 
+        sedmax = self.box_maxsed.value() 
+        if sedmin == sedmax : 
+            sedmax += 0.01 
+                      
+        self.ax00.set_xlim(watmin,watmax) # water         
+        self.ax10.set_xlim(bblmin,bblmax) # bbl
+        self.ax20.set_xlim(sedmin,sedmax) # sediment 
+   
+
 def set_widget_styles(self):
     
     # Push buttons style
-    for axis in (self.time_prof_all,self.time_prof_last_year,
-                 self.dist_prof_button,self.fick_box, 
+    for axis in (#self.time_prof_last_year, #self.time_prof_all,
+                 self.fick_box, #self.dist_prof_button,
                  self.all_year_button,self.help_button):   
         axis.setStyleSheet(
         'QPushButton {background-color: #c2b4ae; border-width: 5px;'
@@ -505,29 +475,26 @@ def widget_layout(self):
        
         #first line 
         self.grid.addWidget(self.help_button,0,0,1,1) # help_dialog           
-        self.grid.addWidget(self.toolbar,0,1,1,1) 
+        self.grid.addWidget(self.toolbar,0,1,1,1)        
         self.grid.addWidget(self.fick_box,0,2,1,1)         
-        self.grid.addWidget(self.time_prof_all,0,3,1,1)  
-        #self.grid.addWidget(self.dist_prof_button,0,4,1,1)            
-        #self.grid.addWidget(self.time_prof_box,1,0,1,1)                              
+                             
         ###self.grid.addWidget(self.numcol_2d ,0,5,1,1)                      
         ###self.grid.addWidget(self.label_maxcol ,0,6,1,1)                
         #self.grid.addWidget(self.injlines_checkbox,0,6,1,1)  
-
-        self.grid.addWidget(self.groupBox,0,7,2,1)  
         
+        self.grid.addWidget(self.time_groupBox,0,3,1,1)
+        self.grid.addWidget(self.dist_groupBox,1,3,1,1)
+        
+        self.grid.addWidget(self.cmap_groupBox ,0,5,2,1)     
+        self.grid.addWidget(self.OptionsgroupBox ,0,6,2,1)  
+                     
         #second line
-                                     
-        self.grid.addWidget(self.time_prof_last_year,1,2,1,1) 
-        #self.grid.addWidget(self.all_year_1d_box,1,2,1,1)         
-        self.grid.addWidget(self.all_year_button,1,3,1,1)    
+                                            
+        self.grid.addWidget(self.all_year_button,1,2,1,1)    
                                      
         ####self.grid.addWidget(self.numday_box,1,4,1,1) 
         ####self.grid.addWidget(self.numday_stop_box,1,5,1,1) 
-        ######self.grid.addWidget(self.label_maxday ,1,6,1,1)
-        
-     
-        self.grid.addWidget(self.time_groupBox,0,6,2,1)
+        ######self.grid.addWidget(self.label_maxday ,1,6,1,1)       
         #self.grid.addWidget(self.yearlines_checkbox,1,7,1,1)          
         #self.grid.addWidget(self.textbox2,1,6,1,1)  
  
@@ -535,4 +502,4 @@ def widget_layout(self):
         self.grid.addWidget(self.canvas, 2, 1,1,8)     
         self.grid.addWidget(self.qlistwidget,2,0,2,1) 
         self.grid.addWidget(self.label_choose_var,1,0,1,1)  
-        
+     

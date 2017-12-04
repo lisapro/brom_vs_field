@@ -119,14 +119,8 @@ def fluxes(self):
     
     
     ax00.set_title(var1+', '+ z_units )
-    
-    self.figure.suptitle(str(self.totitle),fontsize=16)
     #                , fontweight='bold')
-    #print (z_units, var1)
     ax00.set_ylabel('Fluxes') #Label y axis
-    
-    #ax00.text(0, 0, 'column{}'.format(numcol), style='italic')
-    #bbox={'facecolor':'red', 'alpha':0.5,'pad':10}
     
     fick = []
     for n in range(start,stop): 
@@ -144,15 +138,6 @@ def fluxes(self):
     ax00.fill_between(self.time[start:stop],  fick, 0 ,
                       where= fick < 0.,color = towater, label=u"up")
     ax00.set_ylim(max(fick),min(fick)) 
-    #                  where = fick > 0 ,
-    #                  , interpolate=True) 
     
-    #ax.fill_between(x, y1, y2, where=y2 >= y1,
-    # facecolor='green', interpolate=True)         
-    #rc({'savefig.transparent' : True})
     self.canvas.draw()
           
-
-## function to plot figure where 
-## xaxis - is horizontal distance between columns
-## yaxis is depth 
