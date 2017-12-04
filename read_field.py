@@ -120,164 +120,360 @@ def read(self):
     Ni_2010 = np.array(r1[12]).astype(float)  
  
     f.close()
-            
+     
+    mfc ='#b71c1c' 
+    mec = '#5b0e0e'   
+    mew = 0.7    
+    
     if index == 'Alk':
-        self.ax00.plot(Alk_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(Alk_1507,depth_1507,'ro-',zorder = 10)
-
-                            
-        self.ax10.plot(Alk_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(Alk_1507,depth_1507,'ro-',zorder = 10)       
-        self.ax10.plot(Alk_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(Alk_2010,depth_2010,'ro-',zorder = 10)  
+        self.ax00.plot(Alk_1808,depth_1808,'ro-', 
+                       mfc = mfc,mec = mec,mew = mew,
+                        zorder = 10)
+        self.ax00.plot(Alk_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                         zorder = 10)
+                     
+        self.ax10.plot(Alk_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                         zorder = 10)
+        self.ax10.plot(Alk_1507,depth_1507,'ro-',
+                       mfc = mfc, mec = mec,mew = mew,
+                        zorder = 10)       
+        self.ax10.plot(Alk_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec, mew = mew,
+                        zorder = 10)   
+        self.ax10.plot(Alk_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec, mew = mew,
+                         zorder = 10)  
         
-        self.ax20.plot(Alk_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(Alk_2010,sed_depth_2010,'ro-',zorder = 10) 
+        self.ax20.plot(Alk_2009,sed_depth_2009,'ro-', 
+                       mfc = mfc,mec = mec, mew = mew,
+                         zorder = 10) 
+        self.ax20.plot(Alk_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec, mew = mew,
+                         zorder = 10) 
                      
     elif index == 'pH':
                 
-        self.ax00.plot(pH_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(pH_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(pH_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,                       
+                       zorder = 10)
+        self.ax00.plot(pH_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(pH_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(pH_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(pH_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(pH_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(pH_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(pH_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(pH_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(pH_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(pH_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(pH_2010,sed_depth_2010,'ro-',zorder = 10) 
+        self.ax20.plot(pH_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(pH_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
                 
     elif index == 'H2S':
                   
-        self.ax10.plot(H2S_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(H2S_1507,depth_1507,'ro-',zorder = 10)         
-        self.ax10.plot(H2S_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(H2S_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(H2S_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(H2S_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)         
+        self.ax10.plot(H2S_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(H2S_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(H2S_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(H2S_2010,sed_depth_2010,'ro-',zorder = 10)       
+        self.ax20.plot(H2S_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(H2S_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)       
         
     elif index == 'PO4':
                 
-        self.ax00.plot(PO4_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(PO4_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(PO4_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(PO4_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(PO4_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(PO4_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(PO4_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(PO4_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(PO4_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(PO4_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(PO4_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(PO4_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(PO4_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(PO4_2010,sed_depth_2010,'ro-',zorder = 10)         
+        self.ax20.plot(PO4_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(PO4_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)         
         
     elif index == 'DON':
                 
-        self.ax00.plot(DON_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(DON_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(DON_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(DON_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(DON_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(DON_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(DON_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(DON_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(DON_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(DON_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(DON_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(DON_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(DON_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(DON_2010,sed_depth_2010,'ro-',zorder = 10)          
+        self.ax20.plot(DON_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(DON_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)          
         
     elif index == 'NH4':
                 
-        self.ax00.plot(NH4_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(NH4_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(NH4_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(NH4_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(NH4_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(NH4_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(NH4_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(NH4_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(NH4_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(NH4_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(NH4_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(NH4_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(NH4_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(NH4_2010,sed_depth_2010,'ro-',zorder = 10)         
+        self.ax20.plot(NH4_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(NH4_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)         
         
     elif index == 'NO3':
                 
-        self.ax00.plot(NO3_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(NO3_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(NO3_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(NO3_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(NO3_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(NO3_1507,depth_1507,'ro-',zorder = 10)   
-        self.ax10.plot(NO3_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(NO3_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(NO3_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(NO3_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
 
-        self.ax20.plot(NO3_2010,sed_depth_2010,'ro-',zorder = 10) 
+        self.ax20.plot(NO3_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
         
     elif index == 'SO4':
                 
-        self.ax00.plot(SO4_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(SO4_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(SO4_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(SO4_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(SO4_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(SO4_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(SO4_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(SO4_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(SO4_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(SO4_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(SO4_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(SO4_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(SO4_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(SO4_2010,sed_depth_2010,'ro-',zorder = 10) 
+        self.ax20.plot(SO4_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(SO4_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
                 
     elif index == 'Fe2':
                 
-        self.ax00.plot(Fe_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(Fe_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(Fe_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(Fe_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(Fe_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(Fe_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(Fe_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(Fe_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(Fe_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(Fe_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(Fe_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(Fe_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(Fe_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(Fe_2010,sed_depth_2010,'ro-',zorder = 10)     
-        
+        self.ax20.plot(Fe_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(Fe_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)     
+    
     elif index == 'Mn2' :
                 
-        self.ax00.plot(Mn_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(Mn_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(Mn_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(Mn_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(Mn_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(Mn_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(Mn_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(Mn_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(Mn_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(Mn_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(Mn_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        
+        self.ax10.plot(Mn_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(Mn_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(Mn_2010,sed_depth_2010,'ro-',zorder = 10)   
+        self.ax20.plot(Mn_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(Mn_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
         
     elif index == 'Ni':
                 
-        self.ax00.plot(Ni_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(Ni_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(Ni_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(Ni_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(Ni_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(Ni_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(Ni_2009,depth_2009,'ro-',zorder = 10)   
-        self.ax10.plot(Ni_2010,depth_2010,'ro-',zorder = 10)
+        self.ax10.plot(Ni_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(Ni_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(Ni_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
+        self.ax10.plot(Ni_2010,depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                 
-        self.ax20.plot(Ni_2009,sed_depth_2009,'ro-',zorder = 10) 
-        self.ax20.plot(Ni_2010,sed_depth_2010,'ro-',zorder = 10)         
+        self.ax20.plot(Ni_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax20.plot(Ni_2010,sed_depth_2010,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)         
               
     elif index == 'Hg0' or index == 'Hg2' or index =='Hg2_tot_diss':
                 
-        self.ax00.plot(Hgtot_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(Hgtot_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(Hgtot_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(Hgtot_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(Hgtot_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(Hgtot_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(Hgtot_2009,depth_2009,'ro-',zorder = 10)   
+        self.ax10.plot(Hgtot_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(Hgtot_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(Hgtot_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
                 
-        self.ax20.plot(Hgtot_2009,sed_depth_2009,'ro-',zorder = 10) 
+        self.ax20.plot(Hgtot_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
         
     elif index == 'MeHg' or index =='MeHg_tot_diss':
                 
-        self.ax00.plot(MeHg_1808,depth_1808,'ro-',zorder = 10)
-        self.ax00.plot(MeHg_1507,depth_1507,'ro-',zorder = 10)
+        self.ax00.plot(MeHg_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax00.plot(MeHg_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
                      
-        self.ax10.plot(MeHg_1808,depth_1808,'ro-',zorder = 10)
-        self.ax10.plot(MeHg_1507,depth_1507,'ro-',zorder = 10) 
-        self.ax10.plot(MeHg_2009,depth_2009,'ro-',zorder = 10)   
+        self.ax10.plot(MeHg_1808,depth_1808,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)
+        self.ax10.plot(MeHg_1507,depth_1507,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10) 
+        self.ax10.plot(MeHg_2009,depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
                 
-        self.ax20.plot(MeHg_2009,sed_depth_2009,'ro-',zorder = 10)   
+        self.ax20.plot(MeHg_2009,sed_depth_2009,'ro-',
+                       mfc = mfc,mec = mec,mew = mew,
+                       zorder = 10)   
                           
