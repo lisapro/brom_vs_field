@@ -403,19 +403,18 @@ def setmaxmin(self,axis,var,type):
 
 def set_maxmin(self,variable):
     if  self.change_limits_checkbox.isChecked():
-
-        watmin = self.box_minwater.value() 
-        watmax = self.box_maxwater.value()         
+        watmin = float(self.box_minwater.text())
+        watmax = float(self.box_maxwater.text())     
         if watmin == watmax : 
             watmax += 0.01
             
-        bblmin = self.box_minbbl.value() 
-        bblmax = self.box_maxbbl.value()
+        bblmin = float(self.box_minbbl.text())
+        bblmax = float(self.box_maxbbl.text())
         if bblmin == bblmax : 
             bblmax += 0.01
                             
-        sedmin = self.box_minsed.value() 
-        sedmax = self.box_maxsed.value() 
+        sedmin = float(self.box_minsed.text())
+        sedmax = float(self.box_maxsed.text())
         if sedmin == sedmax : 
             sedmax += 0.01 
  
