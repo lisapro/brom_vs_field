@@ -15,6 +15,8 @@ from netCDF4 import Dataset,num2date
 import main
 import numpy as np
 import math
+from matplotlib import ticker
+from matplotlib import rcParams
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 from matplotlib import rc
@@ -426,7 +428,19 @@ def set_maxmin(self,variable):
         bblmax = watmax
         sedmin = variable[:,self.nysedmin:].min()          
         sedmax = variable[:,self.nysedmin:].max()  
-                         
+        
+    #rcParams['axes.formatter.limits'] = [0.01,1000]     
+    from matplotlib.ticker import ScalarFormatter
+    def fmt(x, pos):
+        a, b = '{:.1e}'.format(x).split('e')
+        b = int(b)
+        return r'${} \cdot 10^{{{}}}$'.format(a, b) 
+     
+    if watmax < 0.001 or watmin > 10000 :
+        for n in (self.ax00,self.ax10,self.ax20):
+            n.xaxis.set_major_formatter(
+            ticker.FormatStrFormatter('%0.1e'))    
+            #self.ax00.set_major_formatter(xfmt)                    
     self.ax00.set_xlim(watmin,watmax) # water         
     self.ax10.set_xlim(bblmin,bblmax) # bbl
     self.ax20.set_xlim(sedmin,sedmax) # sediment 

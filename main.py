@@ -209,15 +209,7 @@ def createCmapLimitsGroup(self):
         self.box_maxbbl = QtWidgets.QLineEdit()          
         self.box_minsed = QtWidgets.QLineEdit()   
         self.box_maxsed = QtWidgets.QLineEdit()       
-                
-        '''self.box_minwater.setMaximum(1000000000)   
-        self.box_minbbl.setMaximum(1000000000)       
-        self.box_minsed.setMaximum(1000000000)      
-                      
-        self.box_maxwater.setMaximum(1000000000)   
-        self.box_maxbbl.setMaximum(1000000000)           
-        self.box_maxsed.setMaximum(1000000000)  '''
-        
+                        
         cmap_grid = QtWidgets.QGridLayout(self.cmap_groupBox) 
         
         # cmap_grid.addWidget(self.change_limits_checkbox,0,0,1,1) 
