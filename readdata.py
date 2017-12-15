@@ -436,7 +436,7 @@ def set_maxmin(self,variable):
         b = int(b)
         return r'${} \cdot 10^{{{}}}$'.format(a, b) 
      
-    if watmax < 0.001 or watmin > 10000 :
+    if watmax < 0.01 or watmin > 10000 :
         for n in (self.ax00,self.ax10,self.ax20):
             n.xaxis.set_major_formatter(
             ticker.FormatStrFormatter('%0.1e'))    
