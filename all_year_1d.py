@@ -54,11 +54,11 @@ def plot(self):
     self.ax00.set_title(index +', ' + data_units) 
     
     #Label y axis        
-    self.ax00.set_ylabel('h, m', 
+    self.ax00.set_ylabel('depth, m', 
                     fontsize= self.font_txt) 
-    self.ax10.set_ylabel('h, m', 
+    self.ax10.set_ylabel('depth, m', 
                     fontsize= self.font_txt)   
-    self.ax20.set_ylabel('h, cm', 
+    self.ax20.set_ylabel('depth, cm', 
                     fontsize= self.font_txt)
     
     self.ax00.set_ylim(self.y1max,0) 
@@ -104,6 +104,11 @@ def plot(self):
               linewidth = self.linewidth, zorder = 8)                          
    
     if self.fielddata_checkbox.isChecked():
-        read_field.read(self) 
+        from read_field import field
+        #array = readdata_qmain.ReadVar(
+        #    self.filename,index,start,stop)
+        index = str(self.qlistwidget.currentItem().text())
+        field(index,self.ax00,self.ax10,self.ax20) 
+        
                               
     self.canvas.draw()     
