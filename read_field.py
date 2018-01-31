@@ -34,8 +34,12 @@ class field:
         self.df_2010 = pd.read_csv('field_data/bbl_porewater_2010.txt',
                 sep = '\t', 
                 names = ['depth', "sed_depth",'pH','H2S','Alk',
-                'PO4','DON','NH4','NO3','SO4','Fe2','Mn2','Ni'])        
-        
+                'PO4','DON','NH4','NO3','SO4','Fe2','Mn2','Ni'])      
+          
+        xl = pd.ExcelFile(r'field_data/Water_column_18-08-2009.xlsx')
+        self.o2_1808 = xl.parse("Sheet1")      
+        xl1 = pd.ExcelFile(r'field_data/Water_column_15-07-2009.xlsx')
+        self.o2_1507 = xl1.parse("Sheet1", skiprows=1)   
         self.read() 
         
     def read(self):                                                
@@ -47,8 +51,13 @@ class field:
             self.call_plot('hg_tot')
             
         elif self.index in ('MeHg','MeHg_tot_diss'):
-            self.call_plot('mehg')            
-
+            self.call_plot('mehg')    
+                    
+        elif self.index == 'O2':
+            self.plot_f(self.ax00,self.o2_1808['mkM'],self.o2_1808['meters'])
+            self.plot_f(self.ax10,self.o2_1808['mkM'],self.o2_1808['meters'])    
+            self.plot_f(self.ax00,self.o2_1507['mkM'],self.o2_1507['meters'])
+            self.plot_f(self.ax10,self.o2_1507['mkM'],self.o2_1507['meters'])                     
  
     def call_plot(self,var): 
         
