@@ -37,9 +37,11 @@ class field:
                 'PO4','DON','NH4','NO3','SO4','Fe2','Mn2','Ni'])      
           
         xl = pd.ExcelFile(r'field_data/Water_column_18-08-2009.xlsx')
-        self.o2_1808 = xl.parse("Sheet1")      
+        self.o2_1808 = xl.parse("Sheet1", skiprows=2)     
+         
         xl1 = pd.ExcelFile(r'field_data/Water_column_15-07-2009.xlsx')
-        self.o2_1507 = xl1.parse("Sheet1", skiprows=1)   
+        self.o2_1507 = xl1.parse("Sheet1", skiprows=3)   
+        
         self.read() 
         
     def read(self):                                                
