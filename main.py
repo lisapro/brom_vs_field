@@ -66,7 +66,9 @@ class Window(QtWidgets.QDialog):
         
         self.all_year_box = QtWidgets.QComboBox()                                                                       
         self.all_year_button = QtWidgets.QPushButton()                                  
-        self.fick_box = QtWidgets.QPushButton() 
+        self.fick_swi = QtWidgets.QPushButton()
+        self.fick_air = QtWidgets.QPushButton()
+
         self.help_button = QtWidgets.QPushButton('Help')
                 
         self.fh = Dataset(self.fname)                    
@@ -89,14 +91,16 @@ class Window(QtWidgets.QDialog):
             self.numday_stop_box.setRange(0, self.lentime)             
             self.numday_stop_box.setValue(self.lentime)
 
-        self.fick_box.setText('Fluxes SWI')
+        self.fick_swi.setText('Fluxes SWI')
+        self.fick_air.setText('Fluxes Atm')
         self.all_year_button.setText('1D plot')
            
         # ## Define connection between clicking the button and 
         # ## calling the function to plot figures         
                                  
         self.all_year_button.released.connect(self.call_all_year)      
-        self.fick_box.released.connect(self.call_fluxes)                                   
+        self.fick_swi.released.connect(self.call_fluxes_swi)  
+        self.fick_air.released.connect(self.call_fluxes_air)                               
         self.help_button.released.connect(self.call_help)
    
         self.canvas = FigureCanvas(self.figure)    
@@ -129,9 +133,12 @@ class Window(QtWidgets.QDialog):
     def call_all_year(self):    
         all_year_1d.plot(self)
         
-    def call_fluxes(self):    
-        fluxes_plot.fluxes(self)
-                                     
+    def call_fluxes_swi(self):    
+        fluxes_plot.fluxes(self,'swi')
+        
+    def call_fluxes_air(self):    
+        fluxes_plot.fluxes(self,'air')    
+                                    
     def call_help(self):
         help_dialog.show(self) 
         

@@ -449,7 +449,7 @@ def set_widget_styles(self):
     
     # Push buttons style
     for axis in (#self.time_prof_last_year, #self.time_prof_all,
-                 self.fick_box, #self.dist_prof_button,
+                 self.fick_swi,self.fick_air, #self.dist_prof_button,
                  self.all_year_button,self.help_button):   
         axis.setStyleSheet(
         'QPushButton {background-color: #c2b4ae; border-width: 5px;'
@@ -472,8 +472,9 @@ def widget_layout(self):
        
         #first line 
         
-        self.grid.addWidget(self.toolbar,0,0,1,1)        
-        self.grid.addWidget(self.fick_box,0,2,1,1)               
+        self.grid.addWidget(self.toolbar,0,0,1,1)
+        self.grid.addWidget(self.fick_air,0,1,1,1)        
+        self.grid.addWidget(self.fick_swi,0,2,1,1)               
         self.grid.addWidget(self.time_groupBox,0,3,1,1)       
         self.grid.addWidget(self.cmap_groupBox ,0,4,2,1)     
         self.grid.addWidget(self.OptionsgroupBox ,0,5,2,1)  

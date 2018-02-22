@@ -20,7 +20,7 @@ import matplotlib.gridspec as gridspec
 
 
 
-def fluxes(self): 
+def fluxes(self,param): 
     plt.clf()     
     try:
         index = str(self.qlistwidget.currentItem().text())
@@ -112,6 +112,7 @@ def fluxes(self):
         ax01.fill_between(self.time[start:stop],  fick2, 0 ,
                       where= fick2 < 0.,color = towater, label=u"up")            
         ax01.set_ylim(max(fick2),min(fick2)) 
+        
     else : 
         messagebox = QtWidgets.QMessageBox.about(
             self, "Retry",'Choose 1 or 2 variables,please') 
@@ -125,10 +126,14 @@ def fluxes(self):
     fick = []
     for n in range(start,stop): 
         # take values for fluxes at sed-vat interf
-        fick.append(zz[n][self.nysedmin])
+        if param == 'swi':
+            fick.append(zz[n][self.nysedmin])
+        elif param == 'air': 
+            fick.append(zz[n][0])     
+           
     fick = np.array(fick) 
     ax00.set_xlim(start,stop)
-    ax00.axhline(0, color='black', linestyle = '--') 
+    #ax00.axhline(0, color='#877655', linestyle = '--') 
 
     ax00.plot(self.time[start:stop],fick, linewidth = 1 ,
               color = linecolor, zorder = 10)  
@@ -138,6 +143,14 @@ def fluxes(self):
     ax00.fill_between(self.time[start:stop],  fick, 0 ,
                       where= fick < 0.,color = towater, label=u"up")
     ax00.set_ylim(max(fick),min(fick)) 
-    
+    m = np.mean(fick)
+    ax00.axhline(m,c = 'r', linestyle = '--',label = 'mean', zorder = 10)
+    #ax.text(3, 8, 'boxed italics text in data coords', style='italic',
+    #    bbox={'facecolor':'red', 'alpha':0.5, 'pad':10})
+    ax00.annotate('Mean Flux = {0:.2e}'.format(m),
+                  bbox={'facecolor':'w', 'alpha':0.7,
+                        'edgecolor':'none', 'pad':5},
+                  fontweight='bold', xy =(start+50,m),
+                   arrowprops=dict(arrowstyle="->"),
+                   xytext=(start+70,m-(m/30.)),color = 'k',zorder = 10)
     self.canvas.draw()
-          
