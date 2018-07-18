@@ -50,13 +50,7 @@ class Window(QtWidgets.QDialog):
         self.totitle = os.path.split(self.fname)[1]
         self.setWindowTitle("BROM Pictures (" + str(self.totitle) + ')')     
         readdata.readdata_brom(self, self.fname)    
-         
-        # Add group Boxes - boxes of widgets
-        createOptionsGroup(self)
-        createTimeGroup(self)
-        createDistGroup(self) 
-        createCmapLimitsGroup(self)
-                
+                         
         # Create widgets
         self.label_choose_var = QtWidgets.QLabel('Choose variable:')                   
 
@@ -64,12 +58,7 @@ class Window(QtWidgets.QDialog):
         self.qlistwidget.setSelectionMode(
             QtWidgets.QAbstractItemView.ExtendedSelection)
         
-        self.all_year_box = QtWidgets.QComboBox()                                                                       
-        self.all_year_button = QtWidgets.QPushButton()                                  
-        self.fick_swi = QtWidgets.QPushButton()
-        self.fick_air = QtWidgets.QPushButton()
-
-        self.help_button = QtWidgets.QPushButton('Help')
+        self.all_year_box = QtWidgets.QComboBox() 
                 
         self.fh = Dataset(self.fname)                    
         readdata.read_num_col(self, self.fname)
@@ -79,29 +68,28 @@ class Window(QtWidgets.QDialog):
         createOptionsGroup(self)
         createTimeGroup(self)
         createDistGroup(self)        
-                
-        if 'i' in self.names_vars: 
-            self.dist = np.array(self.fh.variables['i'])  
-                    
+        createCmapLimitsGroup(self)
+        createButtonsGroup(self)
+         
+        # # Add group Boxes - boxes of widgets
+        #createOptionsGroup(self)
+        #createTimeGroup(self)
+        #createDistGroup(self) 
+        try:
+            self.dist = np.array(self.fh.variables['i'])   
+        except: 
+            pass     
         self.fh.close()
-
-        if 'i' in self.names_vars:                        
+                               
+        #if 'i' in self.names_vars: 
+        if 'i' in self.names_vars:   
+                                 
             self.numcol_2d.setRange(0, int(self.testvar.shape[0] - 1))               
             self.numday_box.setRange(0, self.lentime)              
             self.numday_stop_box.setRange(0, self.lentime)             
             self.numday_stop_box.setValue(self.lentime)
 
-        self.fick_swi.setText('Fluxes SWI')
-        self.fick_air.setText('Fluxes Atm')
-        self.all_year_button.setText('1D plot')
-           
-        # ## Define connection between clicking the button and 
-        # ## calling the function to plot figures         
-                                 
-        self.all_year_button.released.connect(self.call_all_year)      
-        self.fick_swi.released.connect(self.call_fluxes_swi)  
-        self.fick_air.released.connect(self.call_fluxes_air)                               
-        self.help_button.released.connect(self.call_help)
+
    
         self.canvas = FigureCanvas(self.figure)    
         self.toolbar = NavigationToolbar(self.canvas, self)
@@ -131,8 +119,11 @@ class Window(QtWidgets.QDialog):
         self.num = 50. 
         
     def call_all_year(self):    
-        all_year_1d.plot(self)
-        
+        all_year_1d.plot(self,'all')
+
+    def call_one_panel(self):    
+        all_year_1d.plot(self,'one')
+                
     def call_fluxes_swi(self):    
         fluxes_plot.fluxes(self,'swi')
         
@@ -141,7 +132,37 @@ class Window(QtWidgets.QDialog):
                                     
     def call_help(self):
         help_dialog.show(self) 
-        
+
+
+def createButtonsGroup(self):
+    self.all_year_button = QtWidgets.QPushButton()
+    self.one_panel_button= QtWidgets.QPushButton()                                  
+    self.fick_swi = QtWidgets.QPushButton()
+    self.fick_air = QtWidgets.QPushButton()
+    self.help_button = QtWidgets.QPushButton('Help')    
+
+    self.fick_swi.setText('Fluxes SWI')
+    self.fick_air.setText('Fluxes Atm')
+    self.all_year_button.setText('1D plot')
+    self.one_panel_button.setText('1D Sed-BBL')   
+    # ## Define connection between clicking the button and 
+    # ## calling the function to plot figures         
+                             
+    self.all_year_button.released.connect(self.call_all_year)   
+    self.one_panel_button.released.connect(self.call_one_panel)     
+    self.fick_swi.released.connect(self.call_fluxes_swi)  
+    self.fick_air.released.connect(self.call_fluxes_air)                               
+    self.help_button.released.connect(self.call_help)
+    
+    self.buttons_groupBox = QtWidgets.QGroupBox(" ")
+    self.buttons_grid = QtWidgets.QGridLayout(self.buttons_groupBox)   
+
+    # self.time_grid.addWidget(self.last_year_button,0,0,1,1)      
+    self.buttons_grid.addWidget(self.fick_swi, 0, 0, 1, 1)
+    self.buttons_grid.addWidget(self.fick_air, 1, 0, 1, 1)    
+    self.buttons_grid.addWidget(self.one_panel_button, 2, 0, 1, 1)  
+    self.buttons_grid.addWidget(self.all_year_button, 3, 0, 1, 1)  
+                          
 def createDistGroup(self):  
         
     self.dist_groupBox = QtWidgets.QGroupBox("Distance axis")           

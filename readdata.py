@@ -403,54 +403,72 @@ def setmaxmin(self,axis,var,type):
             ((maxv - minv)/2.)))      
 '''
 
-def set_maxmin(self,variable):
-    if  self.change_limits_checkbox.isChecked():
-        watmin = float(self.box_minwater.text())
-        watmax = float(self.box_maxwater.text())     
-        if watmin == watmax : 
-            watmax += 0.01
-            
-        bblmin = float(self.box_minbbl.text())
-        bblmax = float(self.box_maxbbl.text())
-        if bblmin == bblmax : 
-            bblmax += 0.01
-                            
-        sedmin = float(self.box_minsed.text())
-        sedmax = float(self.box_maxsed.text())
-        if sedmin == sedmax : 
-            sedmax += 0.01 
- 
-    else: 
-        
-        watmin = variable[:,0:self.ny2max].min()               
-        watmax = variable[:,0:self.ny2max].max() 
-        bblmin = watmin       
-        bblmax = watmax
-        sedmin = variable[:,self.nysedmin:].min()          
-        sedmax = variable[:,self.nysedmin:].max()  
-        
-    #rcParams['axes.formatter.limits'] = [0.01,1000]     
+def set_maxmin(self,variable,panels = 'all'):
     from matplotlib.ticker import ScalarFormatter
     def fmt(x, pos):
         a, b = '{:.1e}'.format(x).split('e')
         b = int(b)
         return r'${} \cdot 10^{{{}}}$'.format(a, b) 
+ 
+    if panels == 'onepanel':
+        if  self.change_limits_checkbox.isChecked():
+            bblmin = float(self.box_minbbl.text())
+            sedmax = float(self.box_maxsed.text())  
+        else: 
+            bblmin = variable[:,0:self.ny2max].min()                
+            sedmax = variable[:,self.nysedmin:].max()  
+                                     
+        if sedmax < 0.01 or bblmin > 10000 :
+            self.ax20.xaxis.set_major_formatter(
+            ticker.FormatStrFormatter('%0.1e')) 
+            
+        if bblmin == sedmax : 
+                sedmax += 0.01              
+        self.ax20.set_xlim(bblmin,sedmax) # sediment  
+           
+    else:   
+        if  self.change_limits_checkbox.isChecked():
+            watmin = float(self.box_minwater.text())
+            watmax = float(self.box_maxwater.text())     
+            if watmin == watmax : 
+                watmax += 0.01
+                
+            bblmin = float(self.box_minbbl.text())
+            bblmax = float(self.box_maxbbl.text())
+            if bblmin == bblmax : 
+                bblmax += 0.01
+                                
+            sedmin = float(self.box_minsed.text())
+            sedmax = float(self.box_maxsed.text())
+            if sedmin == sedmax : 
+                sedmax += 0.01 
      
-    if watmax < 0.01 or watmin > 10000 :
-        for n in (self.ax00,self.ax10,self.ax20):
-            n.xaxis.set_major_formatter(
-            ticker.FormatStrFormatter('%0.1e'))    
-            #self.ax00.set_major_formatter(xfmt)                    
-    self.ax00.set_xlim(watmin,watmax) # water         
-    self.ax10.set_xlim(bblmin,bblmax) # bbl
-    self.ax20.set_xlim(sedmin,sedmax) # sediment 
-
+        else: 
+            
+            watmin = variable[:,0:self.ny2max].min()               
+            watmax = variable[:,0:self.ny2max].max() 
+            bblmin = watmin       
+            bblmax = watmax
+            sedmin = variable[:,self.nysedmin:].min()          
+            sedmax = variable[:,self.nysedmin:].max()  
+            
+        if watmax < 0.01 or watmin > 10000 :
+            for n in (self.ax00,self.ax10,self.ax20):
+                n.xaxis.set_major_formatter(
+                ticker.FormatStrFormatter('%0.1e'))    
+                #self.ax00.set_major_formatter(xfmt) 
+                                       
+        self.ax00.set_xlim(watmin,watmax) # water         
+        self.ax10.set_xlim(bblmin,bblmax) # bbl
+        self.ax20.set_xlim(sedmin,sedmax) # sediment 
+        
 def set_widget_styles(self):
     
     # Push buttons style
     for axis in (#self.time_prof_last_year, #self.time_prof_all,
                  self.fick_swi,self.fick_air, #self.dist_prof_button,
-                 self.all_year_button,self.help_button):   
+                 self.all_year_button,self.help_button,
+                 self.one_panel_button):   
         axis.setStyleSheet(
         'QPushButton {background-color: #c2b4ae; border-width: 5px;'
         '  padding: 2px; font: bold 15px; }')   
@@ -473,19 +491,21 @@ def widget_layout(self):
         #first line 
         
         self.grid.addWidget(self.toolbar,0,0,1,1)
-        self.grid.addWidget(self.fick_air,0,1,1,1)        
-        self.grid.addWidget(self.fick_swi,0,2,1,1)               
+        #self.grid.addWidget(self.fick_air,0,1,1,1)        
+        #self.grid.addWidget(self.fick_swi,0,2,1,1)    
+        self.grid.addWidget(self.buttons_groupBox,0,2,2,1)            
         self.grid.addWidget(self.time_groupBox,0,3,1,1)       
         self.grid.addWidget(self.cmap_groupBox ,0,4,2,1)     
         self.grid.addWidget(self.OptionsgroupBox ,0,5,2,1)  
                      
         #second line
-        self.grid.addWidget(self.help_button,1,1,1,1)                                        
-        self.grid.addWidget(self.all_year_button,1,2,1,1)    
+        #self.grid.addWidget(self.help_button,1,1,1,1)                                        
+        #self.grid.addWidget(self.all_year_button,1,2,1,1)    
+        #self.grid.addWidget(self.one_panel_button,0,2,1,1)  
         self.grid.addWidget(self.dist_groupBox,1,3,1,1)  
         
         #third line              
         self.grid.addWidget(self.canvas, 2, 1,1,8)     
         self.grid.addWidget(self.qlistwidget,2,0,2,1) 
         self.grid.addWidget(self.label_choose_var,1,0,1,1)  
-     
+        
