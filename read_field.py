@@ -137,9 +137,11 @@ class field_1p:
           
         xl = pd.ExcelFile(r'field_data/Water_column_18-08-2009.xlsx')
         self.o2_1808 = xl.parse("Sheet1", skiprows=2)     
-         
+        self.o2_1808['sed_depth'] = self.o2_1808.cm * (-1) 
+        
         xl1 = pd.ExcelFile(r'field_data/Water_column_15-07-2009.xlsx')
         self.o2_1507 = xl1.parse("Sheet1", skiprows=3)   
+        self.o2_1507['sed_depth'] = self.o2_1507.cm * (-1) 
         
         self.read() 
         
@@ -154,7 +156,12 @@ class field_1p:
         elif self.index in ('MeHg','MeHg_tot_diss'):
             self.call_plot('mehg')    
                                        
- 
+        elif self.index == 'O2':
+            #print(self.df_1808.sed_depth,self.o2_1808)
+
+            self.plot_f(self.ax20,self.o2_1808['mkM'],self.o2_1808.sed_depth)    
+            self.plot_f(self.ax20,self.o2_1507['mkM'],self.o2_1507.sed_depth)    
+              
     def call_plot(self,var): 
         
         try: 
@@ -175,8 +182,13 @@ class field_1p:
         try:                     
             self.plot_f(self.ax20,self.df_2010[var],self.df_2010.sed_depth)    
         except: 
-            pass  
-                       
+            pass 
+         
+        try:                     
+            self.plot_f(self.ax20,self.df_2010[var],self.df_2010.sed_depth)    
+        except: 
+            pass     
+                         
     def plot_f(self,axis,varf,depthf):  
         axis.plot(varf,depthf,'ro-',
             mfc = self.mfc,mec = self.mec,mew = self.mew,
