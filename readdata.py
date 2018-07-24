@@ -132,9 +132,9 @@ def colors(self):
 
     self.font_txt = 15 #(height / 190.)
     # text on figure 2 (Water; BBL, Sed) 
-    self.xlabel_fontsize = 10
+    self.xlabel_fontsize = 14 #0
     #(height / 170.) #14 #axis labels      
-    self.ticklabel_fontsize = 10 #(height / 190.) #14 #axis labels   
+    self.ticklabel_fontsize = 14 #(height / 190.) #14 #axis labels   
     self.linewidth = 0.7   
              
 def axis_pos(self): # for plot with all var in one page 

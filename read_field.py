@@ -35,9 +35,11 @@ class field:
           
         xl = pd.ExcelFile(r'field_data/Water_column_18-08-2009.xlsx')
         self.o2_1808 = xl.parse("Sheet1", skiprows=2)     
-         
+        self.o2_1808['sed_depth'] = self.o2_1808.cm * (-1) 
+        
         xl1 = pd.ExcelFile(r'field_data/Water_column_15-07-2009.xlsx')
         self.o2_1507 = xl1.parse("Sheet1", skiprows=3)   
+        self.o2_1507['sed_depth'] = self.o2_1507.cm * (-1)  
  
         self.index = index 
         if len(axes) == 3:
@@ -66,7 +68,9 @@ class field:
             self.plot_f(self.ax10,self.o2_1808['mkM'],self.o2_1808['meters'])    
             self.plot_f(self.ax00,self.o2_1507['mkM'],self.o2_1507['meters'])
             self.plot_f(self.ax10,self.o2_1507['mkM'],self.o2_1507['meters'])                     
- 
+            self.plot_f(self.ax20,self.o2_1808['mkM'],self.o2_1808.sed_depth)    
+            self.plot_f(self.ax20,self.o2_1507['mkM'],self.o2_1507.sed_depth) 
+             
     def call_plot(self,var): 
         
         try: 
@@ -158,7 +162,6 @@ class field_1p:
                                        
         elif self.index == 'O2':
             #print(self.df_1808.sed_depth,self.o2_1808)
-
             self.plot_f(self.ax20,self.o2_1808['mkM'],self.o2_1808.sed_depth)    
             self.plot_f(self.ax20,self.o2_1507['mkM'],self.o2_1507.sed_depth)    
               
