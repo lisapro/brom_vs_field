@@ -106,7 +106,8 @@ def plot(self,opt = 'all'):
             #array = readdata_qmain.ReadVar(
             #    self.filename,index,start,stop)
             index = str(self.qlistwidget.currentItem().text())
-            field(index,(self.ax00,self.ax10,self.ax20)) 
+            field(index,self.ax20) 
+            
     if opt == 'one':
         gs = gridspec.GridSpec(1,1) 
         gs.update(left=0.3, right=0.7,top = 0.94,bottom = 0.06,
