@@ -7,7 +7,7 @@ class field:
         self.index = index
         xls = r'field_data\JOSSINGFJORD_DGT_uM.xlsx'
         self.df = pd.read_excel(xls,header = 1,
-                       names = ['station','sed_depth','Mn2','Fe2','Ni'])   
+                       names = ['station','sed_depth','Mn2','Fe2','Ni_tot_diss'])   
         self.df.sed_depth = self.df.sed_depth/10
         self.mfc ='#b71c1c'  # marker facecolor
         self.mec = '#5b0e0e' # marker edgecolor    
@@ -16,7 +16,7 @@ class field:
         self.read() 
         
     def read(self):                                                
-        if self.index in ('Fe2','Mn2','Ni'):
+        if self.index in ('Fe2','Mn2','Ni_tot_diss'):
             self.call_plot(self.index)
                              
     def call_plot(self,var): 
@@ -43,12 +43,12 @@ class field_1p:
            
         xls = r'field_data\JOSSINGFJORD_DGT_uM.xlsx'
         self.df = pd.read_excel(xls,header = 1,
-                       names = ['station','sed_depth','Mn2','Fe2','Ni'])   
+                       names = ['station','sed_depth','Mn2','Fe2','Ni_tot_diss'])   
         self.df.sed_depth = self.df.sed_depth/10
         self.read() 
         
     def read(self):                                                
-        if self.index in ('Fe2','Mn2','Ni'):
+        if self.index in ('Fe2','Mn2','Ni_tot_diss'):
             self.call_plot(self.index)
                               
     def call_plot(self,var): 
