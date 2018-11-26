@@ -10,4 +10,4 @@ The easiest way is to use Enthought Canopy(https://store.enthought.com/downloads
 2. Clone this repository (https://github.com/lisapro/brom_vs_field.git) into python working folder.  
 3. You should place the text output file in the same folder and name it Brom_Berre_out.nc ( Standard name for the output, usually you won't need to change the name) 
 4. Run it
-  You can run it either on Canopy or just by double clicking the main.py file 
+
