@@ -18,7 +18,7 @@ import read_field
 
 
 def plot(self,opt = 'all'): 
-               
+    print ('in all year 1d plot',opt)           
     plt.clf()        
     try:
         index = str(self.qlistwidget.currentItem().text())
@@ -106,8 +106,9 @@ def plot(self,opt = 'all'):
             #array = readdata_qmain.ReadVar(
             #    self.filename,index,start,stop)
             index = str(self.qlistwidget.currentItem().text())
-            field(index,self.ax20) 
-            
+            print (index,'all_year')
+            field(index,self.ax00,self.ax10) 
+           
     if opt == 'one':
         gs = gridspec.GridSpec(1,1) 
         gs.update(left=0.3, right=0.7,top = 0.94,bottom = 0.06,

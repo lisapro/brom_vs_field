@@ -119,9 +119,11 @@ class Window(QtWidgets.QDialog):
         self.num = 50. 
         
     def call_all_year(self):    
+        print ('call all year')
         all_year_1d.plot(self,'all')
 
-    def call_one_panel(self):    
+    def call_one_panel(self): 
+        print ('call all year, one ')   
         all_year_1d.plot(self,'one')
                 
     def call_fluxes_swi(self):    
@@ -144,7 +146,7 @@ def createButtonsGroup(self):
     self.fick_swi.setText('Fluxes SWI')
     self.fick_air.setText('Fluxes Atm')
     self.all_year_button.setText('1D plot')
-    self.one_panel_button.setText('1D Sed-BBL')   
+    #self.one_panel_button.setText('1D Sed-BBL')   
     # ## Define connection between clicking the button and 
     # ## calling the function to plot figures         
                              
